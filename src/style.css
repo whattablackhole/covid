@@ -1,10 +1,5 @@
-h1 {
-    color: orange;
-}
-.cat {
-    background: url('./assets/cat.jpg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 400px;
-    height: 400px;
-}
+
+/* сброс стилей */
+@import "./css/reset.css";
+/* стили index.html */
+@import "./css/main.css";
