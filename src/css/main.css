@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(13, minmax(50px, 1fr));
+  grid-template-areas:
+    "countries countries map map map map map map"
+    "countries countries map map map map map map"
+    "countries countries map map map map map map" "countries countries map map map map map map"
+    "countries countries map map map map map map" "countries countries map map map map map map"
+    "countries countries map map map map map map"
+    "countries countries info info info graph graph graph"
+    "countries countries info info info graph graph graph"
+    "countries countries info info info graph graph graph"
+    "countries countries info info info graph graph graph"
+    "countries countries info info info graph graph graph"
+    "footer footer footer footer footer footer footer footer";
+}
+
+.contries {
+  grid-area: countries;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(206, 62, 62);
+}
+
+.info {
+  grid-area: info;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(47, 77, 131);
+}
+
+.graph {
+  grid-area: graph;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(96, 172, 115);
+}
+
+.map {
+  grid-area: map;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(160, 46, 135);
+}
+
+.footer {
+  grid-area: footer;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(15, 197, 143);
+}
+
+@media screen and (max-width: 1000px) {
+  .app-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, minmax(300px, 1fr)) minmax(300px, 2fr) 50px;
+    grid-template-areas:
+      "countries"
+      "info"
+      "graph"
+      "map"
+      "footer";
+  }
+}
