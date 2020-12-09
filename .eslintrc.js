@@ -10,6 +10,10 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        "max-len": [1, 70, 2, { "ignoreComments": true }]
+        "no-alert" : 0,
+        "wrap-iife" : 0,
+        "import/extensions" : 0,
+        "func-names" : 0,
+        "no-console" : "off"
     },
 };

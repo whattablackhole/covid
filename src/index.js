@@ -1,6 +1,8 @@
+import APIBehavior from './js/API.behavior.js';
+import './css/main.css';
+import './css/reset.css';
 
-import { getUsers } from "./common/usersAPI";
-import "./style.css";
-import "./style.scss";
-import "./assets/cat.jpg"
-getUsers().then(json => console.log(json));
+(async function () {
+  await APIBehavior.getData();
+})();
+

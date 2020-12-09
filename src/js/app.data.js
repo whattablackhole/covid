@@ -1,7 +1,7 @@
 const appData = {
-  currentCountry: "Global",
+  currentCountry: 'Global',
   covidAPI: {},
-  countriesAPI: [],
+  country: {},
+  countriesAPI: {},
 };
-
 export default appData;
