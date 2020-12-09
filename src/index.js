@@ -1,9 +1,6 @@
-"use strict";
-// вход
-import APIBehavior from "./js/API.behavior.js";
-import appData from "./js/app.data.js";
 
-(async function () {
-  await APIBehavior.getData();
-  //   подключать файлы здесь
-})();
+import { getUsers } from "./common/usersAPI";
+import "./style.css";
+import "./style.scss";
+import "./assets/cat.jpg"
+getUsers().then(json => console.log(json));
