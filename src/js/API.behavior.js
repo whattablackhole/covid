@@ -3,15 +3,18 @@ import appData from './app.data.js';
 const APIBehavior = {
   async getData() {
     // ссылки на API.
-    const countriesAPISource = 'https://restcountries.eu/rest/v2/all?fields=name;population;flag';
-    const covidAPISource = 'https://api.covid19api.com/summary';
+    // const countriesAPISource = 'https://restcountries.eu/rest/v2/all?fields=name;population;flag;alpha2Code;';
+    // const covidAPISource = 'https://api.covid19api.com/summary';
+    // локальные API
+    const countriesAPISource = './assets/countriesAPI.json';
+    const covidAPISource = './assets/covidAPI.json';
+
     const countries = await this.dataFetch(countriesAPISource);
     const covid = await this.dataFetch(covidAPISource);
     appData.covidAPI = {
       ...covid,
     };
     appData.countriesAPI = [...countries];
-    console.log(appData.countriesAPI);
   },
   async dataFetch(src) {
     return fetch(`${src}`).then((response) => response.json());
@@ -28,6 +31,22 @@ const APIBehavior = {
     appData.country = {
       ...country,
     };
+  },
+  getTotalCasesDeathsRecovered(CountryCode){
+    let cases = null;
+    let deaths = null;
+    let recovered = null;
+    let countries = appData.covidAPI.Countries
+
+    countries.forEach(country => {
+      
+      if (country.CountryCode === CountryCode){
+        cases = country.TotalConfirmed
+        deaths = country.TotalDeaths
+        recovered = country.TotalRecovered        
+      }
+    });
+    return [cases, deaths, recovered];
   },
 };
 
