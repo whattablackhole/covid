@@ -1,6 +1,7 @@
 import APIBehavior from './API.behavior.js';
 import appData from './app.data.js';
 import countriesListBehavior from './countries-list.behavior.js'
+import{ valuesOfSortBy, sortData } from './sort.data.js';
 
 export const countriesList = {
     create(){
@@ -24,7 +25,7 @@ export const countriesList = {
             data.setAttribute('data-cases',totalData[0])
             data.setAttribute('data-deaths',totalData[1])
             data.setAttribute('data-recovered',totalData[2])
-            data.innerHTML = totalData[0]
+            data.innerHTML = totalData[valuesOfSortBy[sortData.sortBy]]
             
             flag.style.backgroundImage =`url(${country.flag})` 
             name.innerHTML = country.name
@@ -38,6 +39,16 @@ export const countriesList = {
     addClickListener(button, countryCode){
         button.addEventListener('click',()=>{
             countriesListBehavior.choseCountry(countryCode)
+        })
+    },
+    changeValues(){
+        let list = document.querySelectorAll('.countries__list li')
+        let typeOfValues = sortData.sortBy
+        list.forEach(element => {
+            let spanElement = element.childNodes[0].childNodes[0]
+            let value = element.childNodes[0].childNodes[0].dataset[typeOfValues]
+            
+            spanElement.innerHTML = `${value}`
         })
     }
 }

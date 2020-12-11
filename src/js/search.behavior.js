@@ -8,7 +8,6 @@ const searchBehavior = {
 
     search(input){
         let value = input.value.toLowerCase()
-        if (value == '') value = '*'
         let list = document.querySelectorAll('.countries__list li')
         let regex = new RegExp(`${value}`);
         
