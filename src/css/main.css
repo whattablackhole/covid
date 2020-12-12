@@ -31,10 +31,10 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 100px 4fr 60px;
-  grid-template-areas: 
-  "search"
-  "list"
-  "sort";
+  grid-template-areas:
+    "search"
+    "list"
+    "sort";
   background-color: rgb(206, 62, 62);
 }
 
@@ -79,6 +79,6 @@ body {
   }
 }
 
-.hide{
+.hide {
   display: none;
 }

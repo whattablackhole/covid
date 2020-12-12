@@ -1,5 +1,5 @@
 const appData = {
-  currentCountry: 'Global',
+  currentCountry: "Global",
   covidAPI: {},
   country: {},
   countriesAPI: {},
