@@ -4,7 +4,6 @@ const countriesListBehavior = {
   choseCountry(countryCode) {
     appData.currentCountry = countryCode;
     console.log(appData.currentCountry);
-    //запустить обновления блоков
   },
 };
 
