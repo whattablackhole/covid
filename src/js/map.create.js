@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import mapBehavior from "./map.behavior.js";
 import { sortData } from "./sort.data.js";
 import mapData from "./map.data.js";
@@ -11,7 +13,9 @@ const map = {
       minZoom: 2,
     };
     const mapContainer = new L.Map("map", mapOptions);
-    const layer = new L.TileLayer("https://api.mapbox.com/styles/v1/neiroromo/ckitmzql301wm19o29p4b066i/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibmVpcm9yb21vIiwiYSI6ImNraXRtemxlMjBxNnYyd21tNjM1aThkZ3YifQ.51aEuxph6DwbOeR9eA0TMg");
+    const layer = new L.TileLayer(
+      "https://api.mapbox.com/styles/v1/neiroromo/ckitmzql301wm19o29p4b066i/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibmVpcm9yb21vIiwiYSI6ImNraXRtemxlMjBxNnYyd21tNjM1aThkZ3YifQ.51aEuxph6DwbOeR9eA0TMg"
+    );
     mapContainer.addLayer(layer);
     this.addMarkers(mapContainer);
     this.addLegend(mapContainer);
@@ -65,9 +69,23 @@ const map = {
     legend.onAdd = function () {
       const div = L.DomUtil.create("div", "info legend");
       const { max } = sortData;
-      const grades = [0, max * 0.0000001, max * 0.000001, max * 0.00001, max * 0.0001, max * 0.001, max * 0.01, max * 0.2, max * 0.5, max * 0.9];
+      const grades = [
+        0,
+        max * 0.0000001,
+        max * 0.000001,
+        max * 0.00001,
+        max * 0.0001,
+        max * 0.001,
+        max * 0.01,
+        max * 0.2,
+        max * 0.5,
+        max * 0.9,
+      ];
       for (let i = 0; i < grades.length; i += 1) {
-        div.innerHTML += `<i style="background: ${mapBehavior.getColor(grades[i] + 1, max)}"></i><span>> ${Math.floor(grades[i])}</span>`;
+        div.innerHTML += `<i style="background: ${mapBehavior.getColor(
+          grades[i] + 1,
+          max
+        )}"></i><span>> ${Math.floor(grades[i])}</span>`;
       }
       return div;
     };

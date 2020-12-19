@@ -37,10 +37,21 @@ const APIBehavior = {
   getCountryData(CountryCode) {
     const countriesCovidAPI = appData.covidAPI.Countries;
     const countriesCountriesAPI = appData.countriesAPI;
-    const countryCovidAPI = countriesCovidAPI.find((elem) => elem.CountryCode === CountryCode);
-    const countryCountriesAPI = countriesCountriesAPI.find((elem) => elem.alpha2Code === CountryCode);
+    const countryCovidAPI = countriesCovidAPI.find(
+      (elem) => elem.CountryCode === CountryCode
+    );
+    const countryCountriesAPI = countriesCountriesAPI.find(
+      (elem) => elem.alpha2Code === CountryCode
+    );
     if (!countryCovidAPI) return undefined;
-    const { TotalConfirmed, TotalDeaths, TotalRecovered, NewConfirmed, NewDeaths, NewRecovered } = countryCovidAPI;
+    const {
+      TotalConfirmed,
+      TotalDeaths,
+      TotalRecovered,
+      NewConfirmed,
+      NewDeaths,
+      NewRecovered,
+    } = countryCovidAPI;
     const { population } = countryCountriesAPI;
     return {
       TotalConfirmed,
@@ -55,7 +66,10 @@ const APIBehavior = {
   async checkSavedData() {
     if (localStorage.covidAPI && localStorage.countriesAPI) {
       const currentDate = new Date().toISOString().slice(0, 10);
-      const lastUpdateDate = JSON.parse(localStorage.covidAPI).Date.slice(0, 10);
+      const lastUpdateDate = JSON.parse(localStorage.covidAPI).Date.slice(
+        0,
+        10
+      );
       if (lastUpdateDate !== currentDate) {
         await this.updateAPI();
       }
@@ -66,7 +80,8 @@ const APIBehavior = {
     }
   },
   async updateAPI() {
-    const countriesAPISource = "https://restcountries.eu/rest/v2/all?fields=name;population;flag;alpha2Code;latlng";
+    const countriesAPISource =
+      "https://restcountries.eu/rest/v2/all?fields=name;population;flag;alpha2Code;latlng";
     const covidAPISource = "https://api.covid19api.com/summary";
 
     const covid = await this.dataFetch(covidAPISource);

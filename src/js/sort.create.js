@@ -62,7 +62,8 @@ const sort = {
   },
   updateSortDirectionButtonIcon() {
     const sortDirectionButton = document.querySelector(".material-icons");
-    sortDirectionButton.innerHTML = valuesOfSortDirection[sortData.sortDirection];
+    sortDirectionButton.innerHTML =
+      valuesOfSortDirection[sortData.sortDirection];
   },
 };
 

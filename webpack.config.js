@@ -32,20 +32,14 @@ module.exports = {
           // eslint options (if necessary)
         },
       },
-    plugins: [
-        new PrettierPlugin(),
-        new ESLintPlugin(),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "src", "index.html")
-        }),
-        new webpack.HotModuleReplacementPlugin()
-    ],
-  },
+    ] },
   plugins: [
-    new ESLintPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "src", "index.html"),
-    }),
+      new PrettierPlugin(),
+      new ESLintPlugin(),
+      new HtmlWebpackPlugin({
+          template: path.resolve(__dirname, "src", "index.html")
+      }),
+      new webpack.HotModuleReplacementPlugin()
   ],
   entry: {
     index: path.resolve(__dirname, "src", "index.js"),

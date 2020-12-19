@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { sortData } from "./sort.data.js";
 import mapData from "./map.data.js";
 
@@ -31,7 +33,9 @@ const mapBehavior = {
     const { max } = sortData;
 
     popups.forEach((popup) => {
-      const val = popup.childNodes[0].childNodes[1].childNodes[0].innerHTML.split(": ")[1];
+      const val = popup.childNodes[0].childNodes[1].childNodes[0].innerHTML.split(
+        ": "
+      )[1];
       const color = this.getColor(val, max);
       popup.style.backgroundColor = color;
     });
@@ -69,7 +73,18 @@ const mapBehavior = {
     const { max, sortBy } = sortData;
     const isRecovered = sortBy === "recovered";
     let text = "";
-    const grades = [0, max * 0.1, max * 0.2, max * 0.3, max * 0.4, max * 0.5, max * 0.6, max * 0.7, max * 0.8, max * 0.9];
+    const grades = [
+      0,
+      max * 0.1,
+      max * 0.2,
+      max * 0.3,
+      max * 0.4,
+      max * 0.5,
+      max * 0.6,
+      max * 0.7,
+      max * 0.8,
+      max * 0.9,
+    ];
     values.forEach((value, index) => {
       if (isRecovered) {
         text = ` >= ${Math.floor(grades[grades.length - 1 - index])}`;
@@ -81,7 +96,10 @@ const mapBehavior = {
     });
     colors.forEach((color, i) => {
       if (isRecovered) {
-        color.style.background = this.getColor(grades[grades.length - 1 - i] + 1, max);
+        color.style.background = this.getColor(
+          grades[grades.length - 1 - i] + 1,
+          max
+        );
       } else {
         color.style.background = this.getColor(grades[i] + 1, max);
       }

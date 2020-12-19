@@ -1,5 +1,5 @@
 const appData = {
-  CountryCode: "US",
+  CountryCode: "Global",
   covidAPI: {},
   country: {},
   countriesAPI: {},

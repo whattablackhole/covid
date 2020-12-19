@@ -1,3 +1,4 @@
+/* eslint-disable */
 import APIBehavior from "./API.behavior.js";
 import appData from "./app.data.js";
 import countriesListBehavior from "./countries-list.behavior.js";

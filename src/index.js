@@ -1,5 +1,4 @@
 import APIBehavior from "./js/API.behavior.js";
-
 import "./css/main.css";
 import "./css/reset.css";
 import "./css/info.scss";
@@ -26,4 +25,3 @@ import map from "./js/map.create.js";
   sort.create();
   map.create();
 })();
-
