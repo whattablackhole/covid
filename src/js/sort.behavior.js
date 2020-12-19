@@ -1,4 +1,5 @@
 import { sortData } from "./sort.data.js";
+import APIBehavior from "./API.behavior.js";
 
 const sortBehavior = {
   sort() {
@@ -15,6 +16,7 @@ const sortBehavior = {
       return bVal - aVal;
     });
 
+    sortData.max = toSort[0].childNodes[0].childNodes[0].innerHTML;
     const parent = document.querySelector(".countries__list");
     parent.innerHTML = "";
     toSort.forEach((item) => {

@@ -20,20 +20,23 @@ const APIBehavior = {
       ...country,
     };
   },
-  getTotalCasesDeathsRecovered(CountryCode) {
-    let cases = null;
-    let deaths = null;
-    let recovered = null;
-    const countries = appData.covidAPI.Countries;
-
-    countries.forEach((country) => {
-      if (country.CountryCode === CountryCode) {
-        cases = country.TotalConfirmed;
-        deaths = country.TotalDeaths;
-        recovered = country.TotalRecovered;
-      }
-    });
-    return [cases, deaths, recovered];
+  getCountryData(CountryCode) {
+    const countriesCovidAPI = appData.covidAPI.Countries;
+    const countriesCountriesAPI = appData.countriesAPI;
+    const countryCovidAPI = countriesCovidAPI.find((elem) => elem.CountryCode === CountryCode);
+    const countryCountriesAPI = countriesCountriesAPI.find((elem) => elem.alpha2Code === CountryCode);
+    if (!countryCovidAPI) return undefined;
+    const { TotalConfirmed, TotalDeaths, TotalRecovered, NewConfirmed, NewDeaths, NewRecovered } = countryCovidAPI;
+    const { population } = countryCountriesAPI;
+    return {
+      TotalConfirmed,
+      TotalDeaths,
+      TotalRecovered,
+      NewConfirmed,
+      NewDeaths,
+      NewRecovered,
+      population,
+    };
   },
   async checkSavedData() {
     if (localStorage.covidAPI && localStorage.countriesAPI) {
@@ -49,7 +52,7 @@ const APIBehavior = {
     }
   },
   async updateAPI() {
-    const countriesAPISource = "https://restcountries.eu/rest/v2/all?fields=name;population;flag;alpha2Code;";
+    const countriesAPISource = "https://restcountries.eu/rest/v2/all?fields=name;population;flag;alpha2Code;latlng";
     const covidAPISource = "https://api.covid19api.com/summary";
 
     const covid = await this.dataFetch(covidAPISource);

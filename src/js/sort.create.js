@@ -1,6 +1,7 @@
 import { sortData, valuesOfSortDirection } from "./sort.data.js";
 import countriesList from "./countries-list.create.js";
 import sortBehavior from "./sort.behavior.js";
+import mapBehavior from "./map.behavior.js";
 
 const sort = {
   create() {
@@ -17,6 +18,7 @@ const sort = {
     sortByButton.addEventListener("click", () => {
       this.changeSortBy();
       sortBehavior.sort();
+      mapBehavior.changePopupText();
     });
     sortDirectionButton.addEventListener("click", () => {
       this.changeSortDirection();

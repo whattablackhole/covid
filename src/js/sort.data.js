@@ -1,12 +1,13 @@
 export const sortData = {
   sortBy: "cases",
   sortDirection: "down",
+  max: null,
 };
 
 export const valuesOfSortBy = {
-  cases: 0,
-  deaths: 1,
-  recovered: 2,
+  cases: "TotalConfirmed",
+  deaths: "TotalDeaths",
+  recovered: "TotalRecovered",
 };
 
 export const valuesOfSortDirection = {

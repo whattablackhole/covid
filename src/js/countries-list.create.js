@@ -9,8 +9,8 @@ const countriesList = {
     let totalData = [];
     const ul = document.querySelector(".countries__list");
     countries.forEach((country) => {
-      totalData = APIBehavior.getTotalCasesDeathsRecovered(country.alpha2Code);
-      if (totalData[0] == null) return;
+      totalData = APIBehavior.getCountryData(country.alpha2Code);
+      if (!totalData) return;
       const li = document.createElement("li");
       const countryContainer = document.createElement("button");
       const data = document.createElement("span");
@@ -22,9 +22,15 @@ const countriesList = {
       flag.classList.add("countries__flag");
       name.classList.add("countries__country-name");
 
-      data.setAttribute("data-cases", totalData[0]);
-      data.setAttribute("data-deaths", totalData[1]);
-      data.setAttribute("data-recovered", totalData[2]);
+      data.setAttribute("data-cases", totalData.TotalConfirmed);
+      data.setAttribute("data-deaths", totalData.TotalDeaths);
+      data.setAttribute("data-recovered", totalData.TotalRecovered);
+      data.setAttribute("data-new-cases", totalData.NewConfirmed);
+      data.setAttribute("data-new-deaths", totalData.NewDeaths);
+      data.setAttribute("data-new-recovered", totalData.NewRecovered);
+      data.setAttribute("data-population", totalData.population);
+      data.setAttribute("data-latlng", country.latlng);
+      data.setAttribute("data-name", country.name);
       data.innerHTML = totalData[valuesOfSortBy[sortData.sortBy]];
 
       flag.style.backgroundImage = `url(${country.flag})`;
