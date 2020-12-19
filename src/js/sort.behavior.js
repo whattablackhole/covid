@@ -1,5 +1,4 @@
 import { sortData } from "./sort.data.js";
-import APIBehavior from "./API.behavior.js";
 
 const sortBehavior = {
   sort() {

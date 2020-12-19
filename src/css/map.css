@@ -85,6 +85,10 @@
 .leaflet-control-attribution {
   display: none;
 }
+.leaflet-control-container {
+  position: relative;
+  z-index: 2;
+}
 .leaflet-control,
 .leaflet-right,
 .leaflet-bottom {
