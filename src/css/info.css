@@ -1,0 +1,76 @@
+.info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.toggle-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.info-toggle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 195px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.toggle-one {
+  margin-right: 10px;
+  background-color: yellow !important;
+}
+
+.info-day-time {
+  width: auto;
+  height: auto;
+}
+
+.toggle-two {
+  min-width: 200px;
+  margin-right: 10px;
+  background-color: purple !important;
+}
+
+.info-arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid green;
+  margin-left: 3px;
+}
+
+.info-arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid green;
+  margin-right: 3px;
+}
+
+.hidden {
+  display: none;
+}
+/*# sourceMappingURL=info.css.map */

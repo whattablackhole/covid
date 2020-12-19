@@ -12,13 +12,27 @@ const APIBehavior = {
     const today = date.toISOString().slice(0, 10);
     const name = "Belarus";
     const date2 = new Date();
-    date2.setDate(date2.getDate() - 1);
+    date2.setDate(date2.getDate() - 2);
     const yesterday = date2.toISOString().slice(0, 10);
+    console.log(yesterday);
     const req = `https://api.covid19api.com/country/${name}?from=${yesterday}T00:00:00Z&to=${today}T00:00:00Z;`;
+    console.log(req);
     const country = await this.dataFetch(req);
+    console.log(country);
     appData.country = {
       ...country,
     };
+  },
+  async getGlobalFrom() {
+    const request = "https://api.covid19api.com/country/Belarus";
+    const country = await this.dataFetch(request);
+    const date = country[0].Date;
+    const req = `https://api.covid19api.com/world?from=${date}`;
+    const global = await this.dataFetch(req);
+    appData.globalStats = {
+      ...global,
+    };
+    appData.countryStats = [...country];
   },
   getCountryData(CountryCode) {
     const countriesCovidAPI = appData.covidAPI.Countries;
@@ -71,5 +85,4 @@ const APIBehavior = {
     appData.countriesAPI = [...countries];
   },
 };
-
 export default APIBehavior;
