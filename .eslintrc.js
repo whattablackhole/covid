@@ -20,4 +20,4 @@ module.exports = {
         "no-console" : "off",
         quotes: ['error', 'double'],    
     },
-};
+}
