@@ -1,0 +1,46 @@
+.toggle-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.graph-toggle {
+  display: flex;
+  min-width: 195px;
+  justify-content: space-between;
+}
+.toggle-one {
+  margin-right: 10px;
+  background-color: yellow !important;
+}
+.graph-day-time {
+  width: auto;
+  height: auto;
+}
+.toggle-two {
+  min-width: 200px;
+  margin-right: 10px;
+  background-color: purple !important;
+}
+.graph-arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid green;
+  margin-left: 3px;
+}
+
+.graph-arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid green;
+  margin-right: 3px;
+}
+.hidden {
+  display: none;
+}
+.graph-case {
+  background-color: gold;
+}

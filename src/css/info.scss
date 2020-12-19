@@ -1,0 +1,51 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.info div {
+}
+.toggle-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.info-toggle {
+  display: flex;
+  min-width: 195px;
+  justify-content: space-between;
+}
+.toggle-one {
+  margin-right: 10px;
+  background-color: yellow !important;
+}
+.info-day-time {
+  width: auto;
+  height: auto;
+}
+.toggle-two {
+  min-width: 200px;
+  margin-right: 10px;
+  background-color: purple !important;
+}
+.info-arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid green;
+  margin-left: 3px;
+}
+
+.info-arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid green;
+  margin-right: 3px;
+}
+.hidden {
+  display: none;
+}

@@ -1,19 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Covid</title>
-    <link rel="shortcut icon" href="#">
-</head>
-<body>
+    <link rel="shortcut icon" href="#" />
+  </head>
+
+  <body>
     <main class="app-container">
-        <div class="contries"></div>
-        <div class="map"></div>
-        <div class="info"></div>
-        <div class="graph"></div>
-        <div class="footer"></div>
-    </main>    
-  
-</body>
+      <div class="contries"></div>
+      <div class="map"></div>
+      <div class="info">
+        <div class="info-country">Global</div>
+        <div class="info-stats">
+          <div class="info-death">Number of Death</div>
+          <div class="info-weak">Number of Weak</div>
+          <div class="info-recover">Number of recover</div>
+        </div>
+        <div class="info-toggle toggle-menu">
+          <div class="info-toggle toggle-one">
+            <div class="info-arrow-left"></div>
+            <div class="info-text">
+              <div class="info-whole-time">за весь период</div>
+              <div class="info-day-time hidden">за последний день</div>
+            </div>
+            <div class="info-arrow-right"></div>
+          </div>
+          <div class="info-toggle toggle-two">
+            <div class="info-arrow-left"></div>
+            <div class="info-text">
+              <div class="info-strict-number hidden">на 100 тыс</div>
+              <div class="info-total-number">в абсолютных величинах</div>
+            </div>
+            <div class="info-arrow-right"></div>
+          </div>
+        </div>
+      </div>
+      <div class="graph">
+        <div
+          style="width: 100%; height: 80%; background-color: red"
+          class="chart-container"
+        >
+          <canvas id="myChart"></canvas>
+        </div>
+        <!--  -->
+        <div>
+          <div class="graph-toggle toggle-menu">
+            <div class="graph-toggle toggle-one">
+              <div class="graph-arrow-left"></div>
+              <div class="graph-text">
+                <div class="graph-whole-time">за весь период</div>
+                <div class="graph-day-time hidden">за последний день</div>
+              </div>
+              <div class="graph-arrow-right"></div>
+            </div>
+            <div class="graph-cases">cases</div>
+            <div class="graph-toggle toggle-two">
+              <div class="graph-arrow-left"></div>
+              <div class="graph-text">
+                <div class="graph-strict-number hidden">на 100 тыс</div>
+                <div class="graph-total-number">в абсолютных величинах</div>
+              </div>
+              <div class="graph-arrow-right"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer"></div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  </body>
 </html>

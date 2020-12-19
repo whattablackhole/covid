@@ -4,7 +4,10 @@ module.exports = {
         "es2021": true,
         "node": true
     },
-    "extends": "airbnb-base",
+    "extends": [
+        "airbnb-base", 
+       "prettier"
+    ],
     "parserOptions": {
         "ecmaVersion": 12,
         "sourceType": "module"
@@ -14,6 +17,7 @@ module.exports = {
         "wrap-iife" : 0,
         "import/extensions" : 0,
         "func-names" : 0,
-        "no-console" : "off"
+        "no-console" : "off",
+        quotes: ['error', 'double'],    
     },
 };

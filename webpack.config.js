@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require('eslint-webpack-plugin');
+const webpack = require('webpack');
+const PrettierPlugin = require("prettier-webpack-plugin");
 module.exports = {
     module: {
         rules: [
@@ -33,10 +35,12 @@ module.exports = {
         ]
       },
     plugins: [
+        new PrettierPlugin(),
         new ESLintPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "src", "index.html")
-        })
+        }),
+        new webpack.HotModuleReplacementPlugin()
     ],
     entry: {
         index: path.resolve(__dirname, "src", "index.js")
