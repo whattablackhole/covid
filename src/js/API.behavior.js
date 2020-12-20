@@ -7,10 +7,10 @@ const APIBehavior = {
   async dataFetch(src) {
     return fetch(`${src}`).then((response) => response.json());
   },
-  async getCountryDate() {
+  async getCountryDate(countryName) {
     const date = new Date();
     const today = date.toISOString().slice(0, 10);
-    const name = "Belarus";
+    const name = countryName;
     const date2 = new Date();
     date2.setDate(date2.getDate() - 2);
     const yesterday = date2.toISOString().slice(0, 10);
@@ -20,8 +20,8 @@ const APIBehavior = {
       ...country,
     };
   },
-  async getGlobalFrom() {
-    const request = "https://api.covid19api.com/country/Belarus";
+  async getGlobalFrom(countryName) {
+    const request = `https://api.covid19api.com/country/${countryName}`;
     const country = await this.dataFetch(request);
     const date = country[0].Date;
     const req = `https://api.covid19api.com/world?from=${date}`;

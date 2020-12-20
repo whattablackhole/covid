@@ -89,32 +89,40 @@
           </button>
         </div>
         <div
-          style="width: 100%; height: 80%; background-color: red"
+          style="width: 100%; height: 90%; background-color: red"
           class="chart-container"
         >
           <canvas id="myChart"></canvas>
         </div>
         <!--  -->
-        <div>
-          <div class="graph-toggle toggle-menu hide">
-            <div class="graph-toggle toggle-one">
-              <div class="graph-arrow-left"></div>
-              <div class="graph-text">
-                <div class="graph-whole-time">за весь период</div>
-                <div class="graph-day-time hidden">за последний день</div>
-              </div>
-              <div class="graph-arrow-right"></div>
+        <div class="graph-wrapper hidden">
+          <form class="graph-buttons">
+            <div class="radiobtn">
+              <input type="radio" id="deaths" name="drone" value="deaths" />
+              <label for="deaths"> Deaths </label>
             </div>
-            <div class="graph-cases">cases</div>
-            <div class="graph-toggle toggle-two">
-              <div class="graph-arrow-left"></div>
-              <div class="graph-text">
-                <div class="graph-strict-number hidden">на 100 тыс</div>
-                <div class="graph-total-number">в абсолютных величинах</div>
-              </div>
-              <div class="graph-arrow-right"></div>
+
+            <div class="radiobtn">
+              <input
+                type="radio"
+                id="recovored"
+                name="drone"
+                value="recovored"
+              />
+              <label for="recovored"> Recovored </label>
             </div>
-          </div>
+
+            <div class="radiobtn">
+              <input
+                type="radio"
+                id="confirmed"
+                name="drone"
+                value="confirmed"
+                checked
+              />
+              <label for="confirmed"> Confirmed </label>
+            </div>
+          </form>
         </div>
       </div>
       <div class="footer"></div>
