@@ -16,11 +16,15 @@ import "./css/countries-list.css";
 import "./css/map.css";
 import "./css/fullscreenButton.css";
 import "./css/fullscreen.css";
+import "./css/buttons.scss";
+import appData from "./js/app.data.js";
 
 (async () => {
   await APIBehavior.getData();
-  await APIBehavior.getCountryDate();
-  await APIBehavior.getGlobalFrom();
+  // await APIBehavior.getGlobalFrom();
+  // await APIBehavior.getCountryDate();
+  console.log(appData.globalStats);
+  console.log(appData.countryStats);
   menu.initEvents();
   graph.updateInfo();
   countriesList.create();
