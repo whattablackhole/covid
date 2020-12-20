@@ -111,27 +111,27 @@ const mapBehavior = {
     const infoToNew = document.querySelector(
       ".info-toggle.toggle-one .info-arrow-right"
     );
-    const graphToNew = document.querySelector(
-      ".graph-toggle.toggle-one .graph-arrow-right"
-    );
+    // const graphToNew = document.querySelector(
+    //   ".graph-toggle.toggle-one .graph-arrow-right"
+    // );
     const mapSwitcherTo100k = document.querySelector(".map__switch-to100k");
     const infoTo100k = document.querySelector(
       ".info-toggle.toggle-two .info-arrow-right"
     );
-    const graphTo100k = document.querySelector(
-      ".graph-toggle.toggle-two .graph-arrow-right"
-    );
+    // const graphTo100k = document.querySelector(
+    //   ".graph-toggle.toggle-two .graph-arrow-right"
+    // );
 
     const toNew = {
       map: mapSwitcherToNew,
       info: infoToNew,
-      graph: graphToNew,
+      // graph: graphToNew,
     };
 
     const to100k = {
       map: mapSwitcherTo100k,
       info: infoTo100k,
-      graph: graphTo100k,
+      // graph: graphTo100k,
     };
 
     if (button === "toNew") {
