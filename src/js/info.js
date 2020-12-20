@@ -31,23 +31,25 @@ const info = {
       .addEventListener("click", this.changeText.bind(this));
   },
   changeText(e) {
+    console.log("hel");
     if (e.target.parentElement.classList.contains("toggle-one")) {
-      this.dayTime.classList.toggle("hidden");
-      this.totalTime.classList.toggle("hidden");
+      this.dayTime.classList.toggle("hide");
+      this.totalTime.classList.toggle("hide");
       if (
         appData.fullScreenZone === undefined ||
         appData.fullScreenZone === "info"
       )
         mapBehavior.onButtonClickSimulation("toNew", "info");
     } else {
-      this.totalNumber.classList.toggle("hidden");
-      this.strictNumber.classList.toggle("hidden");
+      this.totalNumber.classList.toggle("hide");
+      this.strictNumber.classList.toggle("hide");
       if (
         appData.fullScreenZone === undefined ||
         appData.fullScreenZone === "info"
       )
         mapBehavior.onButtonClickSimulation("to100k", "info");
     }
+    console.log("hello");
     this.updateInfo();
   },
   updateInfo() {
@@ -130,14 +132,14 @@ const info = {
     }
   },
   checkState() {
-    if (this.dayTime.classList.contains("hidden")) {
+    if (this.dayTime.classList.contains("hide")) {
       this.isTotalTimeSet = true;
       this.isStrictTimeSet = false;
     } else {
       this.isTotalTimeSet = false;
       this.isStrictTimeSet = true;
     }
-    if (this.strictNumber.classList.contains("hidden")) {
+    if (this.strictNumber.classList.contains("hide")) {
       this.isTotalNumberSet = true;
       this.isStrictNumberSet = false;
     } else {

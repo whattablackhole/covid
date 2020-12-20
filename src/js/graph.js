@@ -20,7 +20,7 @@ const graph = {
   deathsBtn: document.querySelector("#deaths"),
   recovoredBtn: document.querySelector("#recovored"),
   confirmedBtn: document.querySelector("#confirmed"),
-  initListeners () {
+  initListeners() {
     if (this.listersInited === true) {
       return;
     }
@@ -49,6 +49,7 @@ const graph = {
       if (appData.fullScreenZone === "graph")
         mapBehavior.onButtonClickSimulation("to100k", "graph");
     }
+    console.log("hello");
     this.updateInfo();
   },
   chartConfig: {
@@ -100,13 +101,13 @@ const graph = {
       },
     },
   },
- 
-  createChart () {
+
+  createChart() {
     // eslint-disable-next-line
-  this.myChart = new Chart(this.ctx, this.chartConfig)
+    this.myChart = new Chart(this.ctx, this.chartConfig);
   },
-  
-  getCountryDate () {
+
+  getCountryDate() {
     this.allDates = [];
     this.allDeaths = [];
     this.allConfirms = [];
@@ -137,24 +138,22 @@ const graph = {
           (appData.covidAPI.Global.NewDeaths * 100000) / this.currentPopulation
         ),
       ];
-    } 
-      return [
-        Math.trunc(
-          (appData.covidAPI.Global.TotalDeaths * 100000) /
-            this.currentPopulation
-        ),
-        Math.trunc(
-          (appData.covidAPI.Global.TotalRecovered * 100000) /
-            this.currentPopulation
-        ),
-        Math.trunc(
-          (appData.covidAPI.Global.TotalConfirmed * 100000) /
-            this.currentPopulation
-        ),
-      ];
-    
+    }
+    return [
+      Math.trunc(
+        (appData.covidAPI.Global.TotalDeaths * 100000) / this.currentPopulation
+      ),
+      Math.trunc(
+        (appData.covidAPI.Global.TotalRecovered * 100000) /
+          this.currentPopulation
+      ),
+      Math.trunc(
+        (appData.covidAPI.Global.TotalConfirmed * 100000) /
+          this.currentPopulation
+      ),
+    ];
   },
-  async updateInfo () {
+  async updateInfo() {
     if (this.myChart !== null) {
       this.myChart.destroy();
     }
@@ -163,7 +162,7 @@ const graph = {
     info.checkState();
     this.calcPopulation();
     if (appData.CountryCode === "Global") {
-      document.querySelector(".graph-wrapper").classList.add("hidden");
+      document.querySelector(".graph-wrapper").classList.add("hide");
       this.chartConfig.data.datasets[0].label = "Global";
       this.chartConfig.type = "bar";
       this.createChart();
@@ -213,7 +212,7 @@ const graph = {
         this.myChart.update();
       }
     } else {
-      document.querySelector(".graph-wrapper").classList.remove("hidden");
+      document.querySelector(".graph-wrapper").classList.remove("hide");
       this.chartConfig.data.datasets[0].label = `${this.country.Country}`;
       this.chartConfig.type = "line";
       this.myChart.destroy();
