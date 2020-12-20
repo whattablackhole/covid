@@ -108,6 +108,7 @@ const graph = {
   },
 
   getCountryDate() {
+    console.log(info.currentPopulation);
     this.allDates = [];
     this.allDeaths = [];
     this.allConfirms = [];
@@ -116,26 +117,44 @@ const graph = {
       this.allDates.push(element.Date.slice(0, -10));
     });
     appData.countryStats.forEach((element) => {
-      this.allDeaths.push(element.Deaths);
+      if (info.isStrictNumberSet)
+        this.allDeaths.push(
+          Math.trunc((element.Deaths * 1000000) / info.currentPopulation)
+        );
+      else {
+        this.allDeaths.push(element.Deaths);
+      }
     });
     appData.countryStats.forEach((element) => {
-      this.allConfirms.push(element.Confirmed);
+      if (info.isStrictNumberSet)
+        this.allConfirms.push(
+          Math.trunc((element.Confirmed * 1000000) / info.currentPopulation)
+        );
+      else {
+        this.allConfirms.push(element.Confirmed);
+      }
     });
     appData.countryStats.forEach((element) => {
-      this.allRecovered.push(element.Confirmed);
+      if (info.isStrictNumberSet)
+        this.allRecovered.push(
+          Math.trunc((element.Recovered * 1000000) / info.currentPopulation)
+        );
+      else {
+        this.allRecovered.push(element.Recovered);
+      }
     });
   },
   dividePopulation() {
     if (this.isStrictTimeSet && this.isStrictNumberSet) {
       return [
+        Math.trunc(appData.covidAPI.Global.NewDeaths * 100000),
         Math.trunc(
-          (appData.covidAPI.Global.NewDeaths * 100000) / this.currentPopulation
+          (appData.covidAPI.Global.NewRecovered * 100000) /
+            this.currentPopulation
         ),
         Math.trunc(
-          (appData.covidAPI.Global.NewDeaths * 100000) / this.currentPopulation
-        ),
-        Math.trunc(
-          (appData.covidAPI.Global.NewDeaths * 100000) / this.currentPopulation
+          (appData.covidAPI.Global.NewConfirmed * 100000) /
+            this.currentPopulation
         ),
       ];
     }
@@ -195,20 +214,34 @@ const graph = {
       }
       if (info.isTotalTimeSet && info.isStrictNumberSet) {
         this.myChart.data.labels = [
-          "Total Death/100",
-          "Total Recovered/100",
-          "Total Confirmed/100",
+          "Total Death/100T",
+          "Total Recovered/100T",
+          "Total Confirmed/100T",
         ];
         this.myChart.data.datasets[0].data = this.dividePopulation();
         this.myChart.update();
       }
       if (info.isStrictTimeSet && info.isStrictNumberSet) {
         this.myChart.data.labels = [
-          "New Death/100",
-          "New Recovered/100",
-          "New Confirmed/100",
+          "New Death/100T",
+          "New Recovered/100T",
+          "New Confirmed/100T",
         ];
-        this.myChart.data.datasets[0].data = this.dividePopulation();
+
+        this.myChart.data.datasets[0].data = [
+          Math.trunc(
+            (appData.covidAPI.Global.NewDeaths * 100000) /
+              info.currentPopulation
+          ),
+          Math.trunc(
+            (appData.covidAPI.Global.NewRecovered * 100000) /
+              info.currentPopulation
+          ),
+          Math.trunc(
+            (appData.covidAPI.Global.NewConfirmed * 100000) /
+              info.currentPopulation
+          ),
+        ];
         this.myChart.update();
       }
     } else {
@@ -219,22 +252,64 @@ const graph = {
       this.createChart();
       await APIBehavior.getGlobalFrom(this.country.Country);
       await APIBehavior.getCountryDate(this.country.Country);
+      console.log(appData.countryStats);
       this.getCountryDate();
-      if (this.deathsBtn.checked === true) {
-        this.myChart.data.labels = this.allDates;
-        this.myChart.data.datasets[0].data = [...this.allDeaths];
-        this.myChart.update();
+      if (info.isStrictTimeSet) {
+        if (this.myChart !== null) {
+          this.myChart.destroy();
+        }
+        this.chartConfig.type = "bar";
+        this.createChart();
+        if (info.isTotalNumberSet) {
+          this.myChart.data.labels = [
+            "New Deaths",
+            "New Recovered",
+            "New Confirmed",
+          ];
+          this.myChart.data.datasets[0].data = [
+            info.country.NewDeaths,
+            info.country.NewRecovered,
+            info.country.NewConfirmed,
+          ];
+          this.myChart.update();
+        } else {
+          this.myChart.data.labels = [
+            "New Deaths/100T",
+            "New Recovered/100T",
+            "New Confirmed/100T",
+          ];
+          this.myChart.data.datasets[0].data = [
+            Math.trunc(
+              (info.country.NewDeaths * 100000) / info.currentPopulation
+            ),
+            Math.trunc(
+              (info.country.NewRecovered * 100000) / info.currentPopulation
+            ),
+            Math.trunc(
+              (info.country.NewConfirmed * 100000) / info.currentPopulation
+            ),
+          ];
+          this.myChart.update();
+        }
+      } else {
+        if (this.deathsBtn.checked === true) {
+          this.myChart.data.labels = this.allDates;
+          this.myChart.data.datasets[0].data = [...this.allDeaths];
+          this.myChart.update();
+        }
+        if (this.confirmedBtn.checked === true) {
+          this.myChart.data.labels = this.allDates;
+          this.myChart.data.datasets[0].data = [...this.allConfirms];
+          this.myChart.update();
+        }
+        if (this.recovoredBtn.checked === true) {
+          console.log("a");
+          console.log(this.allRecovered);
+          this.myChart.data.labels = this.allDates;
+          this.myChart.data.datasets[0].data = [...this.allRecovered];
+          this.myChart.update();
+        }
       }
-      if (this.confirmedBtn.checked === true) {
-        this.myChart.data.labels = this.allDates;
-        this.myChart.data.datasets[0].data = [...this.allConfirms];
-        this.myChart.update();
-      }
-    }
-    if (this.recovoredBtn.checked === true) {
-      this.myChart.data.labels = this.allDates;
-      this.myChart.data.datasets[0].data = [...this.allRecovered];
-      this.myChart.update();
     }
   },
   calcPopulation() {

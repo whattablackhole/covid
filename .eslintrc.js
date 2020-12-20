@@ -17,6 +17,7 @@ module.exports = {
     "no-console": "off",
     quotes: ["error", "double"],
     "no-param-reassign": ["error", { props: true, ignorePropertyModificationsFor: ["popup", "value", "color"] }],
+    "import/no-cycle": 0,
   },
   globals: {
     L: true,

@@ -1,5 +1,6 @@
 import appData from "./app.data.js";
 import mapBehavior from "./map.behavior.js";
+import graph from "./graph.js";
 
 const info = {
   leftArrow: document.querySelector(".info-arrow-left"),
@@ -51,6 +52,7 @@ const info = {
     }
     console.log("hello");
     this.updateInfo();
+    graph.updateInfo();
   },
   updateInfo() {
     this.checkState();
