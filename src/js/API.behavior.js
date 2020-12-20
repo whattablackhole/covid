@@ -14,11 +14,8 @@ const APIBehavior = {
     const date2 = new Date();
     date2.setDate(date2.getDate() - 2);
     const yesterday = date2.toISOString().slice(0, 10);
-    console.log(yesterday);
     const req = `https://api.covid19api.com/country/${name}?from=${yesterday}T00:00:00Z&to=${today}T00:00:00Z;`;
-    console.log(req);
     const country = await this.dataFetch(req);
-    console.log(country);
     appData.country = {
       ...country,
     };
@@ -73,6 +70,8 @@ const APIBehavior = {
       if (lastUpdateDate !== currentDate) {
         await this.updateAPI();
       }
+      const updateDOM = document.querySelector(".countries__last-update span");
+      updateDOM.innerHTML = `Последнее обновление: ${lastUpdateDate}`;
       appData.covidAPI = JSON.parse(localStorage.covidAPI);
       appData.countriesAPI = JSON.parse(localStorage.countriesAPI);
     } else {
@@ -98,6 +97,10 @@ const APIBehavior = {
       ...covid,
     };
     appData.countriesAPI = [...countries];
+
+    const updateDOM = document.querySelector(".countries__last-update span");
+    const lastUpdateDate = JSON.parse(localStorage.covidAPI).Date.slice(0, 10);
+    updateDOM.innerHTML = `Последнее обновление: ${lastUpdateDate}`;
   },
 };
 export default APIBehavior;

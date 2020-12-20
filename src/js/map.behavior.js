@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { sortData } from "./sort.data.js";
 import mapData from "./map.data.js";
 
@@ -14,7 +12,8 @@ const mapBehavior = {
       attrName = `data-${sortBy}`;
     }
     const toSort = [];
-    popups.forEach((popup) => {
+    popups.forEach((item) => {
+      const popup = item;
       let data = popup.getAttribute(attrName);
       if (mapData.onlyTo100k) {
         const population = popup.getAttribute("data-population");
@@ -32,7 +31,8 @@ const mapBehavior = {
     const popups = document.querySelectorAll(".icon-marker");
     const { max } = sortData;
 
-    popups.forEach((popup) => {
+    popups.forEach((item) => {
+      const popup = item;
       const val = popup.childNodes[0].childNodes[1].childNodes[0].innerHTML.split(
         ": "
       )[1];
@@ -45,31 +45,31 @@ const mapBehavior = {
     const isRecovered = sortBy === "recovered";
     let color = "";
     if (d > max * 0.9) {
-      isRecovered ? (color = "#6df202") : (color = "#c40000");
+      color = isRecovered ? "#6df202" : "#c40000";
     } else if (d > max * 0.8) {
-      isRecovered ? (color = "#8bf002") : (color = "#d86a00");
+      color = isRecovered ? "#8bf002" : "#d86a00";
     } else if (d > max * 0.7) {
-      isRecovered ? (color = "#aaee01") : (color = "#df9000");
+      color = isRecovered ? "#aaee01" : "#df9000";
     } else if (d > max * 0.6) {
-      isRecovered ? (color = "#c7ec01") : (color = "#e6b600");
+      color = isRecovered ? "#c7ec01" : "#e6b600";
     } else if (d > max * 0.5) {
-      isRecovered ? (color = "#f0e900") : (color = "#eacc00");
+      color = isRecovered ? "#f0e900" : "#eacc00";
     } else if (d > max * 0.4) {
-      isRecovered ? (color = "#eacc00") : (color = "#f0e900");
+      color = isRecovered ? "#eacc00" : "#f0e900";
     } else if (d > max * 0.3) {
-      isRecovered ? (color = "#e6b600") : (color = "#c7ec01");
+      color = isRecovered ? "#e6b600" : "#c7ec01";
     } else if (d > max * 0.2) {
-      isRecovered ? (color = "#df9000") : (color = "#aaee01");
+      color = isRecovered ? "#df9000" : "#aaee01";
     } else if (d > max * 0.1) {
-      isRecovered ? (color = "#d86a00") : (color = "#8bf002");
+      color = isRecovered ? "#d86a00" : "#8bf002";
     } else if (d >= 0) {
-      isRecovered ? (color = "#c40000") : (color = "#6df202");
+      color = isRecovered ? "#c40000" : "#6df202";
     }
     return color;
   },
   updateLegend() {
-    const values = document.querySelectorAll(".info span");
-    const colors = document.querySelectorAll(".info i");
+    const values = document.querySelectorAll(".map__info span");
+    const colors = document.querySelectorAll(".map__info i");
     const { max, sortBy } = sortData;
     const isRecovered = sortBy === "recovered";
     let text = "";
@@ -104,6 +104,48 @@ const mapBehavior = {
         color.style.background = this.getColor(grades[i] + 1, max);
       }
     });
+  },
+  onButtonClickSimulation(button, zone) {
+    const click = new Event("click");
+    const mapSwitcherToNew = document.querySelector(".map__switch-toNew");
+    const infoToNew = document.querySelector(
+      ".info-toggle.toggle-one .info-arrow-right"
+    );
+    const graphToNew = document.querySelector(
+      ".graph-toggle.toggle-one .graph-arrow-right"
+    );
+    const mapSwitcherTo100k = document.querySelector(".map__switch-to100k");
+    const infoTo100k = document.querySelector(
+      ".info-toggle.toggle-two .info-arrow-right"
+    );
+    const graphTo100k = document.querySelector(
+      ".graph-toggle.toggle-two .graph-arrow-right"
+    );
+
+    const toNew = {
+      map: mapSwitcherToNew,
+      info: infoToNew,
+      graph: graphToNew,
+    };
+
+    const to100k = {
+      map: mapSwitcherTo100k,
+      info: infoTo100k,
+      graph: graphTo100k,
+    };
+
+    if (button === "toNew") {
+      Object.entries(toNew).forEach((item) => {
+        if (item[0] !== zone) {
+          item[1].dispatchEvent(click);
+        }
+      });
+    }
+    if (button === "to100k") {
+      Object.entries(to100k).forEach((item) => {
+        if (item[0] !== zone) item[1].dispatchEvent(click);
+      });
+    }
   },
 };
 

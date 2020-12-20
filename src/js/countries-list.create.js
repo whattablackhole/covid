@@ -1,8 +1,8 @@
-/* eslint-disable */
 import APIBehavior from "./API.behavior.js";
 import appData from "./app.data.js";
 import countriesListBehavior from "./countries-list.behavior.js";
 import { valuesOfSortBy, sortData } from "./sort.data.js";
+// import mapBehavior from "./map.behavior.js";
 
 const countriesList = {
   async create() {
@@ -38,10 +38,19 @@ const countriesList = {
       name.innerHTML = country.name;
 
       countryContainer.append(data, flag, name);
-      this.addClickListener(countryContainer, country.alpha2Code);
+      this.addClickListener(
+        countryContainer,
+        country.alpha2Code,
+        country.latlng
+      );
       li.append(countryContainer);
       ul.append(li);
     });
+
+    const defaultCountryButton = document.querySelector(
+      ".countries__default-button"
+    );
+    this.addClickListener(defaultCountryButton, "Global");
   },
   addClickListener(button, countryCode) {
     button.addEventListener("click", () => {

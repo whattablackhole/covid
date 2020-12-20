@@ -4,7 +4,7 @@ body {
 }
 
 .app-container {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   gap: 5px;
   display: grid;
@@ -27,20 +27,24 @@ body {
 }
 
 .countries {
+  position: relative;
   grid-area: countries;
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 4fr 60px;
+  grid-template-rows: 60px 1rem 60px 4fr 60px;
   grid-template-areas:
     "search"
+    "lastUpdate"
+    "defaultButton"
     "list"
     "sort";
   background-color: rgb(206, 62, 62);
 }
 
 .info {
+  position: relative;
   grid-area: info;
   width: 100%;
   height: 100%;
@@ -48,13 +52,16 @@ body {
 }
 
 .graph {
+  position: relative;
   grid-area: graph;
   width: 100%;
   height: 100%;
   background-color: rgb(96, 172, 115);
+  overflow: hidden;
 }
 
 .map {
+  position: relative;
   grid-area: map;
   width: 100%;
   height: 100%;
@@ -71,6 +78,7 @@ body {
 
 @media screen and (max-width: 1340px) {
   .app-container {
+    gap: 0;
     grid-template-areas:
       "countries countries countries countries map map map map"
       "countries countries countries countries map map map map"
@@ -90,7 +98,7 @@ body {
 
 @media screen and (max-width: 768px) {
   .app-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(320px, 1fr);
     grid-template-rows: repeat(4, minmax(300px, 1fr)) minmax(30px, auto);
     grid-template-areas:
       "countries"
@@ -102,5 +110,5 @@ body {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }

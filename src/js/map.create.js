@@ -1,8 +1,7 @@
-/* eslint-disable */
-
 import mapBehavior from "./map.behavior.js";
 import { sortData } from "./sort.data.js";
 import mapData from "./map.data.js";
+import appData from "./app.data.js";
 
 const map = {
   create() {
@@ -10,7 +9,8 @@ const map = {
       center: [20, 50],
       zoom: 2,
       maxZoom: 6,
-      minZoom: 2,
+      minZoom: 1,
+      noWrap: true,
     };
     const mapContainer = new L.Map("map", mapOptions);
     const layer = new L.TileLayer(
@@ -67,7 +67,7 @@ const map = {
   addLegend(mapContainer) {
     const legend = L.control({ position: "bottomright" });
     legend.onAdd = function () {
-      const div = L.DomUtil.create("div", "info legend");
+      const div = L.DomUtil.create("div", "map__info map__legend");
       const { max } = sortData;
       const grades = [
         0,
@@ -99,9 +99,13 @@ const map = {
 
     buttonSwitchToNew.classList.add("map__switch-toNew");
     buttonSwitchTo100k.classList.add("map__switch-to100k");
-    container.classList.add("map__switches");
-    buttonSwitchToNew.innerHTML = `only new = ${mapData.onlyNew}`;
-    buttonSwitchTo100k.innerHTML = `only by 100k = ${mapData.onlyTo100k}`;
+    container.classList.add("map__switches", "hide");
+    buttonSwitchToNew.innerHTML = mapData.onlyNew
+      ? "за последний день"
+      : "за весь период";
+    buttonSwitchTo100k.innerHTML = mapData.onlyTo100k
+      ? "за 100 тыс"
+      : "в абсолютных величинах";
 
     container.append(buttonSwitchToNew, buttonSwitchTo100k);
     control.onAdd = () => container;
@@ -109,12 +113,20 @@ const map = {
     buttonSwitchToNew.addEventListener("click", () => {
       mapData.onlyNew = !mapData.onlyNew;
       mapBehavior.changePopupText();
-      buttonSwitchToNew.innerHTML = `only new = ${mapData.onlyNew}`;
+      buttonSwitchToNew.innerHTML = mapData.onlyNew
+        ? "за последний день"
+        : "за весь период";
+      if (appData.fullScreenZone !== "map") return;
+      mapBehavior.onButtonClickSimulation("toNew", "map");
     });
     buttonSwitchTo100k.addEventListener("click", () => {
       mapData.onlyTo100k = !mapData.onlyTo100k;
       mapBehavior.changePopupText();
-      buttonSwitchTo100k.innerHTML = `only by 100k = ${mapData.onlyTo100k}`;
+      buttonSwitchTo100k.innerHTML = mapData.onlyTo100k
+        ? "за 100 тыс"
+        : "в абсолютных величинах";
+      if (appData.fullScreenZone !== "map") return;
+      mapBehavior.onButtonClickSimulation("to100k", "map");
     });
 
     control.addTo(mapContainer);

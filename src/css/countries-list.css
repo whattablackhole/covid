@@ -1,7 +1,25 @@
-.countries__list {
+.countries__last-update {
+  grid-area: lastUpdate;
+  width: 100%;
+  height: 1rem;
+  text-align: center;
+}
+
+.countries__default {
+  grid-area: defaultButton;
+  width: 100%;
+  height: 60px;
+}
+.countries__default-button {
   width: 100%;
   height: 100%;
-  border: 1px solid wheat;
+  text-align: center;
+}
+
+.countries__list {
+  grid-area: list;
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
 }
 .countries__item {

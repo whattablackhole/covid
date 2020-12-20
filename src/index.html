@@ -18,8 +18,21 @@
   <body>
     <main class="app-container">
       <div class="countries">
+        <div class="fullScreen__container">
+          <button class="fullScreen__button">
+            <span>X</span>
+          </button>
+        </div>
+        <div class="countries__last-update">
+          <span>date</span>
+        </div>
         <div class="countries__search">
           <input type="text" class="countries__input" />
+        </div>
+        <div class="countries__default">
+          <button class="countries__default-button">
+            <span>Default</span>
+          </button>
         </div>
         <ul class="countries__list"></ul>
         <div class="countries__sort">
@@ -31,8 +44,19 @@
           </div>
         </div>
       </div>
-      <div class="map" id="map"></div>
+      <div class="map" id="map">
+        <div class="fullScreen__container" style="z-index: 1">
+          <button class="fullScreen__button">
+            <span>X</span>
+          </button>
+        </div>
+      </div>
       <div class="info">
+        <div class="fullScreen__container">
+          <button class="fullScreen__button">
+            <span>X</span>
+          </button>
+        </div>
         <div class="info-country">Global</div>
         <div class="info-stats">
           <div class="info-death">Number of Death</div>
@@ -59,6 +83,11 @@
         </div>
       </div>
       <div class="graph">
+        <div class="fullScreen__container">
+          <button class="fullScreen__button">
+            <span>X</span>
+          </button>
+        </div>
         <div
           style="width: 100%; height: 80%; background-color: red"
           class="chart-container"
@@ -67,7 +96,7 @@
         </div>
         <!--  -->
         <div>
-          <div class="graph-toggle toggle-menu">
+          <div class="graph-toggle toggle-menu hide">
             <div class="graph-toggle toggle-one">
               <div class="graph-arrow-left"></div>
               <div class="graph-text">

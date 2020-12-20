@@ -62,13 +62,15 @@
   margin: 0.6em 0 0;
 }
 
-.legend {
+.map__legend {
+  padding-right: 18px;
   display: grid;
   grid-template-columns: 30px auto;
-  line-height: 18px;
+  justify-content: flex-end;
   color: white;
+  background-color: rgb(160, 186, 207);
 }
-.legend i {
+.map__legend i {
   width: 18px;
   height: 18px;
   float: left;
@@ -85,14 +87,13 @@
 .leaflet-control-attribution {
   display: none;
 }
-.leaflet-control-container {
-  position: relative;
-  z-index: 2;
-}
-.leaflet-control,
+.leaflet-bottom,
 .leaflet-right,
-.leaflet-bottom {
-  margin: 0 !important;
+.leaflet-control {
+  margin-bottom: 0 !important;
+  margin-right: 0 !important;
+}
+.leaflet-control {
 }
 
 .map__switch-toNew,

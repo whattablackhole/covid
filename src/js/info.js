@@ -1,4 +1,5 @@
 import appData from "./app.data.js";
+import mapBehavior from "./map.behavior.js";
 
 const info = {
   leftArrow: document.querySelector(".info-arrow-left"),
@@ -33,9 +34,19 @@ const info = {
     if (e.target.parentElement.classList.contains("toggle-one")) {
       this.dayTime.classList.toggle("hidden");
       this.totalTime.classList.toggle("hidden");
+      if (
+        appData.fullScreenZone === undefined ||
+        appData.fullScreenZone === "info"
+      )
+        mapBehavior.onButtonClickSimulation("toNew", "info");
     } else {
       this.totalNumber.classList.toggle("hidden");
       this.strictNumber.classList.toggle("hidden");
+      if (
+        appData.fullScreenZone === undefined ||
+        appData.fullScreenZone === "info"
+      )
+        mapBehavior.onButtonClickSimulation("to100k", "info");
     }
     this.updateInfo();
   },
@@ -44,6 +55,7 @@ const info = {
     this.findCountry();
     this.calcPopulation();
     if (appData.CountryCode === "Global") {
+      this.countryName.textContent = "Global";
       if (this.isTotalTimeSet && this.isTotalNumberSet) {
         this.deathTotalNumber.innerHTML = `Total Deaths : ${appData.covidAPI.Global.TotalDeaths} `;
         this.weakTotalNumber.innerHTML = ` Total Recovered : ${appData.covidAPI.Global.TotalRecovered} `;

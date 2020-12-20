@@ -1,4 +1,3 @@
-/* eslint-disable */
 import appData from "./app.data.js";
 import graph from "./graph.js";
 import info from "./info.js";
@@ -8,7 +7,6 @@ const countriesListBehavior = {
     appData.CountryCode = countryCode;
     graph.updateInfo();
     info.updateInfo();
-    console.log(appData.currentCountry);
   },
 };
 

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import appData from "./app.data.js";
+import mapBehavior from "./map.behavior.js";
 
-console.log("hello");
 const graph = {
   myChart: null,
   ctx: document.getElementById("myChart"),
@@ -46,9 +46,13 @@ const graph = {
     if (e.target.parentElement.classList.contains("toggle-one")) {
       this.dayTime.classList.toggle("hidden");
       this.totalTime.classList.toggle("hidden");
+      if (appData.fullScreenZone === "graph")
+        mapBehavior.onButtonClickSimulation("toNew", "graph");
     } else {
       this.totalNumber.classList.toggle("hidden");
       this.strictNumber.classList.toggle("hidden");
+      if (appData.fullScreenZone === "graph")
+        mapBehavior.onButtonClickSimulation("to100k", "graph");
     }
     this.updateInfo();
   },
@@ -180,7 +184,6 @@ const graph = {
       this.chartConfig.type = "bar";
       this.createChart();
       if (this.isTotalTimeSet && this.isTotalNumberSet) {
-        console.log("1");
         this.myChart.data.labels = [
           "Total Deaths",
           "Total Recovered",
@@ -212,7 +215,6 @@ const graph = {
           "Total Recovered/100",
           "Total Confirmed/100",
         ];
-        console.log(this.dividePopulation());
         this.myChart.data.datasets[0].data = this.dividePopulation();
         this.myChart.update();
       }
