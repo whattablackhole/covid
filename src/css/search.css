@@ -1,0 +1,26 @@
+.countries__search {
+  grid-area: search;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.countries__input {
+  width: 70%;
+  height: 50px;
+  padding: 5px;
+  border: 1px solid;
+}
+
+.countries__input::placeholder {
+  color: rgba(255, 255, 255, 0.322);
+}
+
+.use-keyboard-button {
+  width: 60px;
+  height: 50px;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
