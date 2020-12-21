@@ -12,7 +12,7 @@ const chartConfig = {
     datasets: [
       {
         label: "Global",
-        data: [400, 700, 800, 900, 1200, 1500], // ceases
+        data: [], // ceases
         backgroundColor: [
           "rgba(255, 99, 132, 1)",
           "rgba(54, 162, 235, 1)",

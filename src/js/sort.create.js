@@ -5,7 +5,6 @@ import mapBehavior from "./map.behavior.js";
 
 const sort = {
   create() {
-    console.log(sortData);
     const sortByButton = document.querySelector(".countries__sort-method");
     const sortDirectionButton = document.querySelector(".countries__sort-type");
 

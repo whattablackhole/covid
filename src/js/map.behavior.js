@@ -148,7 +148,6 @@ const mapBehavior = {
       });
     }
     if (button === "sortBy") {
-      console.log(button);
       sortByButton.dispatchEvent(click);
     }
   },
