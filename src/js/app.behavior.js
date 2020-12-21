@@ -30,8 +30,12 @@ const appBehavior = {
           document.body.style.overflow = "";
         }
         const mapSwitches = document.querySelector(".map__switches");
+        const countriesSwitches = document.querySelector(
+          ".countries__switchers"
+        );
         // const graphToggle = document.querySelector(".graph-toggle.toggle-menu");
         mapSwitches.classList.toggle("hide");
+        countriesSwitches.classList.toggle("hide");
         // graphToggle.classList.toggle("hide");
 
         const zone = button.parentElement.parentElement.classList[0];
@@ -41,7 +45,6 @@ const appBehavior = {
         } else if (appData.fullScreenZone === zone) {
           appData.fullScreenZone = undefined;
         }
-
         const body = document.querySelector("body");
         body.classList.toggle("overflow");
       });

@@ -115,10 +115,12 @@ const mapBehavior = {
     // const graphToNew = document.querySelector(
     //   ".graph-toggle.toggle-one .graph-arrow-right"
     // );
+    const countriesToNew = document.querySelector(".countries__switch-toNew");
     const mapSwitcherTo100k = document.querySelector(".map__switch-to100k");
     const infoTo100k = document.querySelector(
       ".info-toggle.toggle-two .info-arrow-right"
     );
+    const countriesTo100k = document.querySelector(".countries__switch-to100k");
     // const graphTo100k = document.querySelector(
     //   ".graph-toggle.toggle-two .graph-arrow-right"
     // );
@@ -127,12 +129,14 @@ const mapBehavior = {
       map: mapSwitcherToNew,
       info: infoToNew,
       // graph: graphToNew,
+      countries: countriesToNew,
     };
 
     const to100k = {
       map: mapSwitcherTo100k,
       info: infoTo100k,
       // graph: graphTo100k,
+      countries: countriesTo100k,
     };
 
     if (button === "toNew") {
@@ -148,7 +152,6 @@ const mapBehavior = {
       });
     }
     if (button === "sortBy") {
-      console.log(button);
       sortByButton.dispatchEvent(click);
     }
   },

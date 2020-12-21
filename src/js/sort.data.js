@@ -1,6 +1,8 @@
 export const sortData = {
   sortBy: "cases",
   sortDirection: "down",
+  new: false,
+  to100k: false,
   max: null,
 };
 

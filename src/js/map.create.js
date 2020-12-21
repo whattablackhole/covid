@@ -2,7 +2,6 @@ import mapBehavior from "./map.behavior.js";
 import { sortData } from "./sort.data.js";
 import mapData from "./map.data.js";
 import appData from "./app.data.js";
-// import { doc } from "prettier";
 
 const map = {
   create() {

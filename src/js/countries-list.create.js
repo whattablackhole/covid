@@ -2,7 +2,8 @@ import APIBehavior from "./API.behavior.js";
 import appData from "./app.data.js";
 import countriesListBehavior from "./countries-list.behavior.js";
 import { valuesOfSortBy, sortData } from "./sort.data.js";
-// import mapBehavior from "./map.behavior.js";
+import mapData from "./map.data.js";
+import mapBehavior from "./map.behavior.js";
 
 const countriesList = {
   async create() {
@@ -51,6 +52,7 @@ const countriesList = {
       ".countries__default-button"
     );
     this.addClickListener(defaultCountryButton, "Global");
+    this.addListenerFilters();
   },
   addClickListener(button, countryCode) {
     button.addEventListener("click", () => {
@@ -60,11 +62,43 @@ const countriesList = {
   changeValues() {
     const list = document.querySelectorAll(".countries__list li");
     const typeOfValues = sortData.sortBy;
+    const isByNew = sortData.new;
+    const isBy100k = sortData.to100k;
     list.forEach((element) => {
       const spanElement = element.childNodes[0].childNodes[0];
-      const value = element.childNodes[0].childNodes[0].dataset[typeOfValues];
-
+      const population = element.childNodes[0].childNodes[0].getAttribute(
+        "data-population"
+      );
+      let value = spanElement.dataset[typeOfValues];
+      if (isByNew) value = spanElement.getAttribute(`data-new-${typeOfValues}`);
+      if (isBy100k) value = Math.floor((value * 100000) / population);
       spanElement.innerHTML = `${value}`;
+    });
+  },
+  addListenerFilters() {
+    const buttonSwitchTo100k = document.querySelector(
+      ".countries__switch-to100k"
+    );
+    const buttonSwitchToNew = document.querySelector(
+      ".countries__switch-toNew"
+    );
+    buttonSwitchToNew.addEventListener("click", () => {
+      buttonSwitchToNew.innerHTML = mapData.onlyNew
+        ? "за последний день"
+        : "за весь период";
+      sortData.new = !sortData.new;
+      this.changeValues();
+      if (appData.fullScreenZone !== "countries") return;
+      mapBehavior.onButtonClickSimulation("toNew", "countries");
+    });
+    buttonSwitchTo100k.addEventListener("click", () => {
+      buttonSwitchTo100k.innerHTML = mapData.onlyTo100k
+        ? "за 100 тыс"
+        : "в абсолютных величинах";
+      sortData.to100k = !sortData.to100k;
+      this.changeValues();
+      if (appData.fullScreenZone !== "countries") return;
+      mapBehavior.onButtonClickSimulation("to100k", "countries");
     });
   },
 };

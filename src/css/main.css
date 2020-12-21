@@ -36,13 +36,14 @@ body {
   padding-top: 10px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2rem 60px 60px 4fr 60px;
+  grid-template-rows: 2rem 60px 60px 4fr 60px auto;
   grid-template-areas:
     "lastUpdate"
     "search"
     "defaultButton"
     "list"
-    "sort";
+    "sort"
+    "filters";
   color: white;
 }
 
