@@ -23,8 +23,6 @@ import appData from "./js/app.data.js";
 
 (async () => {
   await APIBehavior.getData();
-  // await APIBehavior.getGlobalFrom();
-  // await APIBehavior.getCountryDate();
   console.log(appData.globalStats);
   console.log(appData.countryStats);
   menu.initEvents();

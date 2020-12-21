@@ -32,6 +32,7 @@ const info = {
       .addEventListener("click", this.changeText.bind(this));
   },
   changeText(e) {
+
     if (e.currentTarget.parentElement.classList.contains("toggle-one")) {
       this.dayTime.classList.toggle("hide");
       this.totalTime.classList.toggle("hide");
@@ -175,9 +176,5 @@ const info = {
     }
     return this.country;
   },
-  showInfoLastDayor() {},
-  showInfoGlobalDays() {},
-  showInfoAbsoluteNumber() {},
-  showInfoPerNumber() {},
 };
 export default info;
