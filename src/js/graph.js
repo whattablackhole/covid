@@ -2,29 +2,31 @@ import appData from "./app.data.js";
 import mapBehavior from "./map.behavior.js";
 import info from "./info.js";
 import APIBehavior from "./API.behavior.js";
+import chartConfig from "./chart.config.js";
 
 const graph = {
-  myChart: null,
   ctx: document.getElementById("myChart"),
+  deathsBtn: document.querySelector("#deaths"),
+  recovoredBtn: document.querySelector("#recovored"),
+  confirmedBtn: document.querySelector("#confirmed"),
+  myChart: null,
+  country: null,
   allDates: [],
   allDeaths: [],
   allRecovered: [],
   allConfirms: [],
-  country: null,
   isTotalNumberSet: true,
   isStrictNumberSet: false,
   isTotalTimeSet: true,
   isStrictTimeSet: false,
+  isListersInited: false,
   currentPopulation: 0,
-  listersInited: false,
-  deathsBtn: document.querySelector("#deaths"),
-  recovoredBtn: document.querySelector("#recovored"),
-  confirmedBtn: document.querySelector("#confirmed"),
+  divisor: 100000,
   initListeners() {
-    if (this.listersInited === true) {
+    if (this.isListersInited === true) {
       return;
     }
-    this.listersInited = true;
+    this.isListersInited = true;
     this.deathsBtn.addEventListener("click", this.changeText.bind(this));
     this.recovoredBtn.addEventListener("click", this.changeText.bind(this));
     this.confirmedBtn.addEventListener("click", this.changeText.bind(this));
@@ -52,63 +54,11 @@ const graph = {
     console.log("hello");
     this.updateInfo();
   },
-  chartConfig: {
-    type: "line",
-    data: {
-      labels: [
-        "2020-01-22",
-        "2020-01-22",
-        "2020-01-22",
-        "2020-01-22",
-        "2020-01-22",
-        "2020-01-22",
-      ], // days
-      datasets: [
-        {
-          label: "Global",
-          data: [400, 700, 800, 900, 1200, 1500], // ceases
-          backgroundColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)",
-          ],
-          borderWidth: 1,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true,
-            },
-          },
-        ],
-      },
-    },
-  },
-
   createChart() {
     // eslint-disable-next-line
-    this.myChart = new Chart(this.ctx, this.chartConfig);
+    this.myChart = new Chart(this.ctx, chartConfig);
   },
-
   getCountryDate() {
-    console.log(info.currentPopulation);
     this.allDates = [];
     this.allDeaths = [];
     this.allConfirms = [];
@@ -119,7 +69,7 @@ const graph = {
     appData.countryStats.forEach((element) => {
       if (info.isStrictNumberSet)
         this.allDeaths.push(
-          Math.trunc((element.Deaths * 1000000) / info.currentPopulation)
+          Math.trunc((element.Deaths * this.divisor) / info.currentPopulation)
         );
       else {
         this.allDeaths.push(element.Deaths);
@@ -128,7 +78,9 @@ const graph = {
     appData.countryStats.forEach((element) => {
       if (info.isStrictNumberSet)
         this.allConfirms.push(
-          Math.trunc((element.Confirmed * 1000000) / info.currentPopulation)
+          Math.trunc(
+            (element.Confirmed * this.divisor) / info.currentPopulation
+          )
         );
       else {
         this.allConfirms.push(element.Confirmed);
@@ -137,7 +89,9 @@ const graph = {
     appData.countryStats.forEach((element) => {
       if (info.isStrictNumberSet)
         this.allRecovered.push(
-          Math.trunc((element.Recovered * 1000000) / info.currentPopulation)
+          Math.trunc(
+            (element.Recovered * this.divisor) / info.currentPopulation
+          )
         );
       else {
         this.allRecovered.push(element.Recovered);
@@ -147,27 +101,28 @@ const graph = {
   dividePopulation() {
     if (this.isStrictTimeSet && this.isStrictNumberSet) {
       return [
-        Math.trunc(appData.covidAPI.Global.NewDeaths * 100000),
+        Math.trunc(appData.covidAPI.Global.NewDeaths * this.divisor),
         Math.trunc(
-          (appData.covidAPI.Global.NewRecovered * 100000) /
+          (appData.covidAPI.Global.NewRecovered * this.divisor) /
             this.currentPopulation
         ),
         Math.trunc(
-          (appData.covidAPI.Global.NewConfirmed * 100000) /
+          (appData.covidAPI.Global.NewConfirmed * this.divisor) /
             this.currentPopulation
         ),
       ];
     }
     return [
       Math.trunc(
-        (appData.covidAPI.Global.TotalDeaths * 100000) / this.currentPopulation
-      ),
-      Math.trunc(
-        (appData.covidAPI.Global.TotalRecovered * 100000) /
+        (appData.covidAPI.Global.TotalDeaths * this.divisor) /
           this.currentPopulation
       ),
       Math.trunc(
-        (appData.covidAPI.Global.TotalConfirmed * 100000) /
+        (appData.covidAPI.Global.TotalRecovered * this.divisor) /
+          this.currentPopulation
+      ),
+      Math.trunc(
+        (appData.covidAPI.Global.TotalConfirmed * this.divisor) /
           this.currentPopulation
       ),
     ];
@@ -182,11 +137,10 @@ const graph = {
     this.calcPopulation();
     if (appData.CountryCode === "Global") {
       document.querySelector(".graph-wrapper").classList.add("hide");
-      this.chartConfig.data.datasets[0].label = "Global";
-      this.chartConfig.type = "bar";
+      chartConfig.data.datasets[0].label = "Global";
+      chartConfig.type = "bar";
       this.createChart();
       if (info.isTotalTimeSet && info.isTotalNumberSet) {
-        // info.istot
         this.myChart.data.labels = [
           "Total Deaths",
           "Total Recovered",
@@ -230,15 +184,15 @@ const graph = {
 
         this.myChart.data.datasets[0].data = [
           Math.trunc(
-            (appData.covidAPI.Global.NewDeaths * 100000) /
+            (appData.covidAPI.Global.NewDeaths * this.divisor) /
               info.currentPopulation
           ),
           Math.trunc(
-            (appData.covidAPI.Global.NewRecovered * 100000) /
+            (appData.covidAPI.Global.NewRecovered * this.divisor) /
               info.currentPopulation
           ),
           Math.trunc(
-            (appData.covidAPI.Global.NewConfirmed * 100000) /
+            (appData.covidAPI.Global.NewConfirmed * this.divisor) /
               info.currentPopulation
           ),
         ];
@@ -246,19 +200,18 @@ const graph = {
       }
     } else {
       document.querySelector(".graph-wrapper").classList.remove("hide");
-      this.chartConfig.data.datasets[0].label = `${this.country.Country}`;
-      this.chartConfig.type = "line";
+      chartConfig.data.datasets[0].label = `${this.country.Country}`;
+      chartConfig.type = "line";
       this.myChart.destroy();
       this.createChart();
       await APIBehavior.getGlobalFrom(this.country.Country);
-      await APIBehavior.getCountryDate(this.country.Country);
       console.log(appData.countryStats);
       this.getCountryDate();
       if (info.isStrictTimeSet) {
         if (this.myChart !== null) {
           this.myChart.destroy();
         }
-        this.chartConfig.type = "bar";
+        chartConfig.type = "bar";
         this.createChart();
         if (info.isTotalNumberSet) {
           this.myChart.data.labels = [
@@ -280,13 +233,15 @@ const graph = {
           ];
           this.myChart.data.datasets[0].data = [
             Math.trunc(
-              (info.country.NewDeaths * 100000) / info.currentPopulation
+              (info.country.NewDeaths * this.divisor) / info.currentPopulation
             ),
             Math.trunc(
-              (info.country.NewRecovered * 100000) / info.currentPopulation
+              (info.country.NewRecovered * this.divisor) /
+                info.currentPopulation
             ),
             Math.trunc(
-              (info.country.NewConfirmed * 100000) / info.currentPopulation
+              (info.country.NewConfirmed * this.divisor) /
+                info.currentPopulation
             ),
           ];
           this.myChart.update();
@@ -295,20 +250,18 @@ const graph = {
         if (this.deathsBtn.checked === true) {
           this.myChart.data.labels = this.allDates;
           this.myChart.data.datasets[0].data = [...this.allDeaths];
-          this.myChart.update();
         }
         if (this.confirmedBtn.checked === true) {
           this.myChart.data.labels = this.allDates;
           this.myChart.data.datasets[0].data = [...this.allConfirms];
-          this.myChart.update();
         }
         if (this.recovoredBtn.checked === true) {
           console.log("a");
           console.log(this.allRecovered);
           this.myChart.data.labels = this.allDates;
           this.myChart.data.datasets[0].data = [...this.allRecovered];
-          this.myChart.update();
         }
+        this.myChart.update();
       }
     }
   },

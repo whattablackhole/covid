@@ -7,25 +7,25 @@ const APIBehavior = {
   async dataFetch(src) {
     return fetch(`${src}`).then((response) => response.json());
   },
-  async getCountryDate(countryName) {
-    const date = new Date();
-    const today = date.toISOString().slice(0, 10);
-    const name = countryName;
-    const date2 = new Date();
-    date2.setDate(date2.getDate() - 2);
-    const yesterday = date2.toISOString().slice(0, 10);
-    const req = `https://api.covid19api.com/country/${name}?from=${yesterday}T00:00:00Z&to=${today}T00:00:00Z;`;
-    const country = await this.dataFetch(req);
-    appData.country = {
-      ...country,
-    };
-  },
+  // async getCountryDate(countryName) {
+  //   const date = new Date();
+  //   const today = date.toISOString().slice(0, 10);
+  //   const name = countryName;
+  //   const date2 = new Date();
+  //   date2.setDate(date2.getDate() - 2);
+  //   const yesterday = date2.toISOString().slice(0, 10);
+  //   const req = `https://api.covid19api.com/country/${name}?from=${yesterday}T00:00:00Z&to=${today}T00:00:00Z;`;
+  //   const country = await this.dataFetch(req);
+  //   appData.country = {
+  //     ...country,
+  //   };
+  // },
   async getGlobalFrom(countryName) {
     const request = `https://api.covid19api.com/country/${countryName}`;
     const country = await this.dataFetch(request);
     const date = country[0].Date;
-    const req = `https://api.covid19api.com/world?from=${date}`;
-    const global = await this.dataFetch(req);
+    const requestTwo = `https://api.covid19api.com/world?from=${date}`;
+    const global = await this.dataFetch(requestTwo);
     appData.globalStats = {
       ...global,
     };

@@ -32,7 +32,6 @@ const info = {
       .addEventListener("click", this.changeText.bind(this));
   },
   changeText(e) {
-    console.log("hel");
     if (e.target.parentElement.classList.contains("toggle-one")) {
       this.dayTime.classList.toggle("hide");
       this.totalTime.classList.toggle("hide");
@@ -50,7 +49,6 @@ const info = {
       )
         mapBehavior.onButtonClickSimulation("to100k", "info");
     }
-    console.log("hello");
     this.updateInfo();
     graph.updateInfo();
   },
@@ -177,9 +175,5 @@ const info = {
     }
     return this.country;
   },
-  showInfoLastDayor() {},
-  showInfoGlobalDays() {},
-  showInfoAbsoluteNumber() {},
-  showInfoPerNumber() {},
 };
 export default info;
