@@ -114,7 +114,7 @@ body {
 @media screen and (max-width: 768px) {
   .app-container {
     grid-template-columns: minmax(320px, 1fr);
-    grid-template-rows: 600px repeat(3, minmax(300px, 1fr)) minmax(30px, auto);
+    grid-template-rows: 600px repeat(3, minmax(300px, 1fr)) 60px;
     grid-template-areas:
       "countries"
       "info"
@@ -122,6 +122,9 @@ body {
       "map"
       "footer";
     gap: 10px;
+  }
+  .footer {
+    font-size: 14px;
   }
 }
 

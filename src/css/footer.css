@@ -1,6 +1,9 @@
 .footer {
   display: flex;
   justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
   color: rgba(255, 255, 255, 0.6);
 }
 .autors {
@@ -16,4 +19,7 @@
   width: 90px;
   height: 30px;
   background-image: url(https://rs.school/images/rs_school_js.svg);
+}
+.footer a:hover {
+  color: rgb(131, 131, 131);
 }

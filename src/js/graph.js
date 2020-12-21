@@ -1,5 +1,5 @@
 import appData from "./app.data.js";
-import mapBehavior from "./map.behavior.js";
+// import mapBehavior from "./map.behavior.js";
 import info from "./info.js";
 import APIBehavior from "./API.behavior.js";
 
@@ -34,20 +34,20 @@ const graph = {
       this.deathsBtn.checked = true;
       this.recovoredBtn.checked = false;
       this.confirmedBtn.checked = false;
-      if (appData.fullScreenZone === "graph")
-        mapBehavior.onButtonClickSimulation("toNew", "graph");
+      // if (appData.fullScreenZone === "graph")
+      //   mapBehavior.onButtonClickSimulation("toNew", "graph");
     } else if (e.target.id === "confirmed") {
       this.confirmedBtn.checked = true;
       this.recovoredBtn.checked = false;
       this.deathsBtn.checked = false;
-      if (appData.fullScreenZone === "graph")
-        mapBehavior.onButtonClickSimulation("to100k", "graph");
+      // if (appData.fullScreenZone === "graph")
+      //   mapBehavior.onButtonClickSimulation("to100k", "graph");
     } else {
       this.recovoredBtn.checked = true;
       this.confirmedBtn.checked = false;
       this.deathsBtn.checked = false;
-      if (appData.fullScreenZone === "graph")
-        mapBehavior.onButtonClickSimulation("to100k", "graph");
+      // if (appData.fullScreenZone === "graph")
+      //   mapBehavior.onButtonClickSimulation("to100k", "graph");
     }
     console.log("hello");
     this.updateInfo();
