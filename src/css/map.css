@@ -62,24 +62,33 @@
   margin: 0.6em 0 0;
 }
 
+.leaflet-bottom.leaflet-right {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr auto;
+  grid-template-areas:
+    "legend"
+    "buttons";
+  backdrop-filter: blur(20px);
+  right: 10px;
+  bottom: 10px;
+}
+
 .map__legend {
+  grid-area: legend;
   padding-right: 18px;
   display: grid;
   grid-template-columns: 30px auto;
   justify-content: flex-end;
   color: white;
-  background-color: rgb(160, 186, 207);
 }
 .map__legend i {
   width: 18px;
   height: 18px;
-  float: left;
-  margin-right: 8px;
   opacity: 0.7;
 }
 
 .leaflet-bottom {
-  width: 210px;
   display: flex;
   flex-direction: column-reverse;
   gap: 3px;
@@ -93,16 +102,28 @@
   margin-bottom: 0 !important;
   margin-right: 0 !important;
 }
-.leaflet-control {
-}
-
 .map__switch-toNew,
-.map__switch-to100k {
-  padding: 0 3px 0 3px;
-  background-color: rgb(160, 186, 207);
+.map__switch-to100k,
+.map__switch-sortBy {
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 0 10px 0 10px;
+  font-size: 14px;
+  color: white;
+  text-align: center;
 }
-
+.map__switch-to100k {
+  min-width: 190px;
+}
+.map__switch-toNew {
+  min-width: 150px;
+}
+.map__switch-sortBy {
+  min-width: 100px;
+}
 .map__switches {
+  grid-area: buttons;
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }

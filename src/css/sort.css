@@ -8,6 +8,10 @@
   height: 50px;
   display: grid;
   grid-template-columns: 3fr 1fr;
+  backdrop-filter: blur(100px);
+  border: 1px solid white;
+  border-radius: 0 0 10px 10px;
+  border-top: none;
   align-items: center;
 }
 .countries__sort-method {
@@ -15,11 +19,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: wheat;
 }
 .countries__sort-type {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(255, 255, 255, 0.247);
 }

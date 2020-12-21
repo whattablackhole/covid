@@ -107,6 +107,7 @@ const mapBehavior = {
   },
   onButtonClickSimulation(button, zone) {
     const click = new Event("click");
+    const sortByButton = document.querySelector(".countries__sort-method");
     const mapSwitcherToNew = document.querySelector(".map__switch-toNew");
     const infoToNew = document.querySelector(
       ".info-toggle.toggle-one .info-arrow-right"
@@ -145,6 +146,10 @@ const mapBehavior = {
       Object.entries(to100k).forEach((item) => {
         if (item[0] !== zone) item[1].dispatchEvent(click);
       });
+    }
+    if (button === "sortBy") {
+      console.log(button);
+      sortByButton.dispatchEvent(click);
     }
   },
 };

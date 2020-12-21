@@ -32,8 +32,7 @@ const info = {
       .addEventListener("click", this.changeText.bind(this));
   },
   changeText(e) {
-    console.log("hel");
-    if (e.target.parentElement.classList.contains("toggle-one")) {
+    if (e.currentTarget.parentElement.classList.contains("toggle-one")) {
       this.dayTime.classList.toggle("hide");
       this.totalTime.classList.toggle("hide");
       if (
@@ -50,7 +49,6 @@ const info = {
       )
         mapBehavior.onButtonClickSimulation("to100k", "info");
     }
-    console.log("hello");
     this.updateInfo();
     graph.updateInfo();
   },
