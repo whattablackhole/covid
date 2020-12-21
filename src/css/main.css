@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: rgb(8, 18, 23);
+}
+
+.app-container {
+  width: 100%;
+  height: 100vh;
+  gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(12, minmax(50px, 1fr)) minmax(30px, auto);
+  grid-template-areas:
+    "countries countries map map map map map map"
+    "countries countries map map map map map map"
+    "countries countries map map map map map map"
+    "countries countries map map map map map map"
+    "countries countries map map map map map map"
+    "countries countries map map map map map map"
+    "countries countries map map map map map map"
+    "countries countries info info info graph graph graph"
+    "countries countries info info info graph graph graph"
+    "countries countries info info info graph graph graph"
+    "countries countries info info info graph graph graph"
+    "countries countries info info info graph graph graph"
+    "footer footer footer footer footer footer footer footer";
+}
+
+.countries {
+  position: relative;
+  grid-area: countries;
+  width: 100%;
+  height: 100%;
+  padding-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2rem 60px 60px 4fr 60px;
+  grid-template-areas:
+    "lastUpdate"
+    "search"
+    "defaultButton"
+    "list"
+    "sort";
+  color: white;
+}
+
+.info {
+  position: relative;
+  grid-area: info;
+  width: 100%;
+  height: 100%;
+}
+
+.graph {
+  position: relative;
+  grid-area: graph;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.map {
+  position: relative;
+  grid-area: map;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.footer {
+  grid-area: footer;
+  width: 100%;
+  height: 100%;
+}
+
+.glass {
+  background: linear-gradient(
+    123.1deg,
+    rgba(255, 254, 254, 0.518) -21.43%,
+    rgba(191, 191, 191, 0.056) 74.32%
+  );
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(100px);
+  border: solid 1px rgb(255 255 255 / 35%);
+  border-radius: 20px;
+}
+.footer.glass {
+  border-radius: 20px 20px 0 0;
+  border-bottom: none;
+}
+
+@media screen and (max-width: 1340px) {
+  .app-container {
+    gap: 0;
+    grid-template-areas:
+      "countries countries countries countries map map map map"
+      "countries countries countries countries map map map map"
+      "countries countries countries countries map map map map"
+      "countries countries countries countries map map map map"
+      "countries countries countries countries map map map map"
+      "countries countries countries countries map map map map"
+      "countries countries countries countries map map map map"
+      "countries countries countries countries map map map map"
+      "info info info info graph graph graph graph"
+      "info info info info graph graph graph graph"
+      "info info info info graph graph graph graph"
+      "info info info info graph graph graph graph"
+      "footer footer footer footer footer footer footer footer";
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app-container {
+    grid-template-columns: minmax(320px, 1fr);
+    grid-template-rows: 600px repeat(3, minmax(300px, 1fr)) 60px;
+    grid-template-areas:
+      "countries"
+      "info"
+      "graph"
+      "map"
+      "footer";
+    gap: 10px;
+  }
+  .footer {
+    font-size: 14px;
+  }
+}
+
+.hide {
+  display: none !important;
+}
