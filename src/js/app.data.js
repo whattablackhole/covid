@@ -5,5 +5,6 @@ const appData = {
   globalStats: {},
   countryStats: {},
   fullScreenZone: undefined,
+  keyboard: false,
 };
 export default appData;

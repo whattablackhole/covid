@@ -19,7 +19,9 @@ import "./css/fullscreen.css";
 import "./css/buttons.scss";
 import "./css/scrollbar.css";
 import "./css/footer.css";
+import "./css/v-keyboard.css";
 import appData from "./js/app.data.js";
+import Keyboard from "./js/v-keyboard.js";
 
 (async () => {
   await APIBehavior.getData();
@@ -33,4 +35,5 @@ import appData from "./js/app.data.js";
   map.create();
   appBehavior.addMouseoverListeners();
   appBehavior.addFullscreenClick();
+  Keyboard.init();
 })();
