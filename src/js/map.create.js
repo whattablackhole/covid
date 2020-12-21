@@ -2,6 +2,7 @@ import mapBehavior from "./map.behavior.js";
 import { sortData } from "./sort.data.js";
 import mapData from "./map.data.js";
 import appData from "./app.data.js";
+// import { doc } from "prettier";
 
 const map = {
   create() {
@@ -96,9 +97,11 @@ const map = {
     const container = document.createElement("div");
     const buttonSwitchToNew = document.createElement("button");
     const buttonSwitchTo100k = document.createElement("button");
+    const buttonSortBy = document.createElement("button");
 
     buttonSwitchToNew.classList.add("map__switch-toNew");
     buttonSwitchTo100k.classList.add("map__switch-to100k");
+    buttonSortBy.classList.add("map__switch-sortBy");
     container.classList.add("map__switches", "hide");
     buttonSwitchToNew.innerHTML = mapData.onlyNew
       ? "за последний день"
@@ -106,8 +109,8 @@ const map = {
     buttonSwitchTo100k.innerHTML = mapData.onlyTo100k
       ? "за 100 тыс"
       : "в абсолютных величинах";
-
-    container.append(buttonSwitchToNew, buttonSwitchTo100k);
+    buttonSortBy.innerHTML = sortData.sortBy;
+    container.append(buttonSortBy, buttonSwitchToNew, buttonSwitchTo100k);
     control.onAdd = () => container;
 
     buttonSwitchToNew.addEventListener("click", () => {
@@ -127,6 +130,10 @@ const map = {
         : "в абсолютных величинах";
       if (appData.fullScreenZone !== "map") return;
       mapBehavior.onButtonClickSimulation("to100k", "map");
+    });
+    buttonSortBy.addEventListener("click", () => {
+      if (appData.fullScreenZone !== "map") return;
+      mapBehavior.onButtonClickSimulation("sortBy", "map");
     });
 
     control.addTo(mapContainer);

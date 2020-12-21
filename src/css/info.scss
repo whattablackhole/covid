@@ -3,46 +3,54 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  color: white;
 }
-.info div {
+.info-country {
+  font-size: 2rem;
+}
+.info-stats {
+  font-size: 1.4rem;
 }
 .toggle-menu {
+  width: 70%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.info-toggle {
-  display: flex;
-  justify-content: space-between;
-}
-.toggle-one {
-  margin-right: 10px;
-  background-color: yellow !important;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 .info-day-time {
   width: auto;
   height: auto;
 }
+.toggle-one,
 .toggle-two {
-  margin-right: 10px;
-  background-color: purple !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  min-width: 150px;
+  max-height: 1.4rem;
+  padding: 5px;
+  border: solid 1px white;
+  border-radius: 20px;
 }
-.info-arrow-right {
-  width: 0;
-  height: 0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid green;
-  margin-left: 3px;
+.toggle-one {
+  min-width: 163px;
 }
-
-.info-arrow-left {
-  width: 0;
-  height: 0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right: 10px solid green;
-  margin-right: 3px;
+.toggle-two {
+  min-width: 240px;
+}
+div[class^="info-arrow"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div[class^="info-arrow"]:hover {
+  cursor: pointer;
+}
+div[class^="info-arrow"]:active {
+  background: rgba($color: #000000, $alpha: 0.2);
 }
 .hidden {
   display: none;

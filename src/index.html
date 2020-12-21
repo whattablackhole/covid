@@ -17,21 +17,25 @@
   </head>
   <body>
     <main class="app-container">
-      <div class="countries">
+      <div class="countries glass">
         <div class="fullScreen__container">
           <button class="fullScreen__button">
-            <span>X</span>
+            <span class="material-icons"> fullscreen </span>
           </button>
         </div>
         <div class="countries__last-update">
           <span>date</span>
         </div>
         <div class="countries__search">
-          <input type="text" class="countries__input" />
+          <input
+            type="text"
+            class="countries__input"
+            placeholder="Название страны"
+          />
         </div>
         <div class="countries__default">
           <button class="countries__default-button">
-            <span>Default</span>
+            <span>Global</span>
           </button>
         </div>
         <ul class="countries__list"></ul>
@@ -44,17 +48,17 @@
           </div>
         </div>
       </div>
-      <div class="map" id="map">
+      <div class="map glass" id="map">
         <div class="fullScreen__container" style="z-index: 1">
           <button class="fullScreen__button">
-            <span>X</span>
+            <span class="material-icons"> fullscreen </span>
           </button>
         </div>
       </div>
-      <div class="info">
+      <div class="info glass">
         <div class="fullScreen__container">
           <button class="fullScreen__button">
-            <span>X</span>
+            <span class="material-icons"> fullscreen </span>
           </button>
         </div>
         <div class="info-country">Global</div>
@@ -65,36 +69,40 @@
         </div>
         <div class="info-toggle toggle-menu">
           <div class="info-toggle toggle-one">
-            <div class="info-arrow-left"></div>
+            <div class="info-arrow-left">
+              <span class="material-icons"> arrow_back_ios </span>
+            </div>
             <div class="info-text">
               <div class="info-whole-time">за весь период</div>
               <div class="info-day-time hide">за последний день</div>
             </div>
-            <div class="info-arrow-right"></div>
+            <div class="info-arrow-right">
+              <span class="material-icons"> arrow_forward_ios </span>
+            </div>
           </div>
           <div class="info-toggle toggle-two">
-            <div class="info-arrow-left"></div>
+            <div class="info-arrow-left">
+              <span class="material-icons"> arrow_back_ios </span>
+            </div>
             <div class="info-text">
               <div class="info-strict-number hide">на 100 тыс</div>
               <div class="info-total-number">в абсолютных величинах</div>
             </div>
-            <div class="info-arrow-right"></div>
+            <div class="info-arrow-right">
+              <span class="material-icons"> arrow_forward_ios </span>
+            </div>
           </div>
         </div>
       </div>
-      <div class="graph">
+      <div class="graph glass">
         <div class="fullScreen__container">
           <button class="fullScreen__button">
-            <span>X</span>
+            <span class="material-icons"> fullscreen </span>
           </button>
         </div>
-        <div
-          style="width: 100%; height: 90%; background-color: red"
-          class="chart-container"
-        >
+        <div style="width: 100%; height: 90%" class="chart-container">
           <canvas id="myChart"></canvas>
         </div>
-        <!--  -->
         <div class="graph-wrapper-main">
           <div class="graph-wrapper">
             <form class="graph-buttons">
@@ -127,7 +135,20 @@
           </div>
         </div>
       </div>
-      <div class="footer"></div>
+      <div class="footer glass">
+        <div class="autors">
+          <span>Авторы:</span>
+          <a href="https://github.com/neiroromo">neiroromo</a>
+          <span>,</span>
+          <a href="https://github.com/whattablackhole">whattablackhole</a>
+        </div>
+        <div class="rsschool">
+          <div class="logo"></div>
+          <a href="https://rs.school/js/"
+            >RSSchool Курс «JavaScript/Front-end»</a
+          >
+        </div>
+      </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </body>

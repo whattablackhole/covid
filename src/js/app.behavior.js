@@ -20,16 +20,19 @@ const appBehavior = {
     buttons = Object.values(buttons);
     buttons.forEach((button) => {
       button.addEventListener("click", () => {
-        buttons.forEach((/* item */) => {
-          // item.parentElement.classList.toggle("z-index");
-        });
         button.parentElement.parentElement.classList.toggle("fullscreen");
         button.parentElement.parentElement.scrollIntoView();
-
+        if (
+          button.parentElement.parentElement.classList.contains("fullscreen")
+        ) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "";
+        }
         const mapSwitches = document.querySelector(".map__switches");
-        const graphToggle = document.querySelector(".graph-toggle.toggle-menu");
+        // const graphToggle = document.querySelector(".graph-toggle.toggle-menu");
         mapSwitches.classList.toggle("hide");
-        graphToggle.classList.toggle("hide");
+        // graphToggle.classList.toggle("hide");
 
         const zone = button.parentElement.parentElement.classList[0];
         const currentAppZone = appData.fullScreenZone;

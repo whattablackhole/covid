@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ESLintPlugin = require('eslint-webpack-plugin');
-const webpack = require('webpack');
+const ESLintPlugin = require("eslint-webpack-plugin");
+const webpack = require("webpack");
 const PrettierPlugin = require("prettier-webpack-plugin");
 
 module.exports = {
@@ -32,14 +32,15 @@ module.exports = {
           // eslint options (if necessary)
         },
       },
-    ] },
+    ],
+  },
   plugins: [
-      new PrettierPlugin(),
-      new ESLintPlugin(),
-      new HtmlWebpackPlugin({
-          template: path.resolve(__dirname, "src", "index.html")
-      }),
-      new webpack.HotModuleReplacementPlugin()
+    new PrettierPlugin(),
+    new ESLintPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "src", "index.html"),
+    }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   entry: {
     index: path.resolve(__dirname, "src", "index.js"),

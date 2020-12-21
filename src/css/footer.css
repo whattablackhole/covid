@@ -1,0 +1,8 @@
+.footer {
+  display: flex;
+  justify-content: space-around;
+  color: rgba(255, 255, 255, 0.6);
+}
+.logo {
+  background-image: url(https://rs.school/images/rs_school_js.svg);
+}

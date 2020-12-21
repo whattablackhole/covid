@@ -59,10 +59,14 @@ const sort = {
 
   updateSortByButtonName() {
     const sortByButton = document.querySelector(".countries__sort-method");
+    const mapSortByButton = document.querySelector(".map__switch-sortBy");
     sortByButton.innerHTML = sortData.sortBy;
+    if (mapSortByButton) mapSortByButton.innerHTML = sortData.sortBy;
   },
   updateSortDirectionButtonIcon() {
-    const sortDirectionButton = document.querySelector(".material-icons");
+    const sortDirectionButton = document.querySelector(
+      ".countries__sort-type .material-icons"
+    );
     sortDirectionButton.innerHTML =
       valuesOfSortDirection[sortData.sortDirection];
   },
