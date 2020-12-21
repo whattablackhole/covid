@@ -51,7 +51,6 @@ const graph = {
       // if (appData.fullScreenZone === "graph")
       //   mapBehavior.onButtonClickSimulation("to100k", "graph");
     }
-    console.log("hello");
     this.updateInfo();
   },
   createChart() {
@@ -205,7 +204,6 @@ const graph = {
       this.myChart.destroy();
       this.createChart();
       await APIBehavior.getGlobalFrom(this.country.Country);
-      console.log(appData.countryStats);
       this.getCountryDate();
       if (info.isStrictTimeSet) {
         if (this.myChart !== null) {
@@ -256,8 +254,6 @@ const graph = {
           this.myChart.data.datasets[0].data = [...this.allConfirms];
         }
         if (this.recovoredBtn.checked === true) {
-          console.log("a");
-          console.log(this.allRecovered);
           this.myChart.data.labels = this.allDates;
           this.myChart.data.datasets[0].data = [...this.allRecovered];
         }

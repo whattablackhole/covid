@@ -19,12 +19,9 @@ import "./css/fullscreen.css";
 import "./css/buttons.scss";
 import "./css/scrollbar.css";
 import "./css/footer.css";
-import appData from "./js/app.data.js";
 
 (async () => {
   await APIBehavior.getData();
-  console.log(appData.globalStats);
-  console.log(appData.countryStats);
   menu.initEvents();
   graph.updateInfo();
   countriesList.create();
