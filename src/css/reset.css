@@ -66,6 +66,7 @@ select {
   cursor: pointer;
   background: none;
   color: inherit;
+  outline: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -75,4 +76,13 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* neiroromo */
+.material-icons {
+  font-weight: inherit;
+  font-style: inherit;
+  line-height: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
 }

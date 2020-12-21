@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 body {
-  margin: 0;
-  padding: 0;
+  font-family: "Roboto", sans-serif;
+  background: rgb(8, 18, 23);
 }
 
 .app-container {
@@ -31,16 +33,17 @@ body {
   grid-area: countries;
   width: 100%;
   height: 100%;
+  padding-top: 10px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 60px 1rem 60px 4fr 60px;
+  grid-template-rows: 2rem 60px 60px 4fr 60px;
   grid-template-areas:
-    "search"
     "lastUpdate"
+    "search"
     "defaultButton"
     "list"
     "sort";
-  background-color: rgb(206, 62, 62);
+  color: white;
 }
 
 .info {
@@ -48,7 +51,6 @@ body {
   grid-area: info;
   width: 100%;
   height: 100%;
-  background-color: rgb(47, 77, 131);
 }
 
 .graph {
@@ -56,7 +58,6 @@ body {
   grid-area: graph;
   width: 100%;
   height: 100%;
-  background-color: rgb(96, 172, 115);
   overflow: hidden;
 }
 
@@ -65,7 +66,6 @@ body {
   grid-area: map;
   width: 100%;
   height: 100%;
-  background-color: rgb(160, 46, 135);
   overflow: hidden;
 }
 
@@ -73,7 +73,22 @@ body {
   grid-area: footer;
   width: 100%;
   height: 100%;
-  background-color: rgb(15, 197, 143);
+}
+
+.glass {
+  background: linear-gradient(
+    123.1deg,
+    rgba(255, 254, 254, 0.518) -21.43%,
+    rgba(191, 191, 191, 0.056) 74.32%
+  );
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(100px);
+  border: solid 1px rgb(255 255 255 / 35%);
+  border-radius: 20px;
+}
+.footer.glass {
+  border-radius: 20px 20px 0 0;
+  border-bottom: none;
 }
 
 @media screen and (max-width: 1340px) {
@@ -99,13 +114,17 @@ body {
 @media screen and (max-width: 768px) {
   .app-container {
     grid-template-columns: minmax(320px, 1fr);
-    grid-template-rows: repeat(4, minmax(300px, 1fr)) minmax(30px, auto);
+    grid-template-rows: 600px repeat(3, minmax(300px, 1fr)) 60px;
     grid-template-areas:
       "countries"
       "info"
       "graph"
       "map"
       "footer";
+    gap: 10px;
+  }
+  .footer {
+    font-size: 14px;
   }
 }
 

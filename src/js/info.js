@@ -32,7 +32,8 @@ const info = {
       .addEventListener("click", this.changeText.bind(this));
   },
   changeText(e) {
-    if (e.target.parentElement.classList.contains("toggle-one")) {
+
+    if (e.currentTarget.parentElement.classList.contains("toggle-one")) {
       this.dayTime.classList.toggle("hide");
       this.totalTime.classList.toggle("hide");
       if (
