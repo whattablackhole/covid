@@ -119,12 +119,12 @@ const graph = {
     const tempDeaths = Array.from(this.globalStats.deaths);
     this.globalStats.deaths = this.globalStats.deaths.map((key, index) => {
       if (index === 0) return key;
-      return key - tempDeaths[index - 1];
+      return Math.abs(key - tempDeaths[index - 1]);
     });
     const tempCases = Array.from(this.globalStats.cases);
     this.globalStats.cases = this.globalStats.cases.map((key, index) => {
       if (index === 0) return key;
-      return key - tempCases[index - 1];
+      return Math.abs(key - tempCases[index - 1]);
     });
     const tempRecovored = Array.from(this.globalStats.recovered);
     this.globalStats.recovered = this.globalStats.recovered.map(
@@ -228,7 +228,7 @@ const graph = {
             );
             tempDeaths = tempDeaths.map((key, index) => {
               if (index === 0) return key;
-              return key - compareArr[index - 1];
+              return Math.abs(key - compareArr[index - 1]);
             });
             this.myChart.data.labels = Object.keys(
               appData.countryStatsObj.timeline.deaths
@@ -245,7 +245,7 @@ const graph = {
             );
             tempCases = tempCases.map((key, index) => {
               if (index === 0) return key;
-              return key - compareArr[index - 1];
+              return Math.abs(key - compareArr[index - 1]);
             });
             this.myChart.data.labels = Object.keys(
               appData.countryStatsObj.timeline.cases
@@ -261,7 +261,7 @@ const graph = {
             );
             tempRecovered = tempRecovered.map((key, index) => {
               if (index === 0) return key;
-              return key - compareArr[index - 1];
+              return Math.abs(key - compareArr[index - 1]);
             });
             this.myChart.data.labels = Object.keys(
               appData.countryStatsObj.timeline.recovered
@@ -284,9 +284,9 @@ const graph = {
                 return Math.trunc(
                   (key * this.divisor) / this.currentPopulation
                 );
-              return (
-                Math.trunc((key * this.divisor) / this.currentPopulation) -
-                compareArr[index - 1]
+              return Math.trunc(
+                Math.abs((key * this.divisor) / this.currentPopulation) -
+                  compareArr[index - 1]
               );
             });
             this.myChart.data.labels = Object.keys(
@@ -309,9 +309,9 @@ const graph = {
                 return Math.trunc(
                   (key * this.divisor) / this.currentPopulation
                 );
-              return (
-                Math.trunc((key * this.divisor) / this.currentPopulation) -
-                compareArr[index - 1]
+              return Math.trunc(
+                Math.abs((key * this.divisor) / this.currentPopulation) -
+                  compareArr[index - 1]
               );
             });
             this.myChart.data.labels = Object.keys(
@@ -332,11 +332,11 @@ const graph = {
             tempCases = tempCases.map((key, index) => {
               if (index === 0)
                 return Math.trunc(
-                  (key * this.divisor) / this.currentPopulation
+                  Math.abs((key * this.divisor) / this.currentPopulation)
                 );
-              return (
-                Math.trunc((key * this.divisor) / this.currentPopulation) -
-                compareArr[index - 1]
+              return Math.trunc(
+                Math.abs((key * this.divisor) / this.currentPopulation) -
+                  compareArr[index - 1]
               );
             });
             this.myChart.data.labels = Object.keys(
