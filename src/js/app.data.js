@@ -4,6 +4,7 @@ const appData = {
   countriesAPI: {},
   globalStats: {},
   countryStats: {},
+  countryStatsObj: {},
   fullScreenZone: undefined,
   keyboard: false,
 };

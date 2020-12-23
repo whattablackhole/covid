@@ -7,29 +7,21 @@ const APIBehavior = {
   async dataFetch(src) {
     return fetch(`${src}`).then((response) => response.json());
   },
-  // async getCountryDate(countryName) {
-  //   const date = new Date();
-  //   const today = date.toISOString().slice(0, 10);
-  //   const name = countryName;
-  //   const date2 = new Date();
-  //   date2.setDate(date2.getDate() - 2);
-  //   const yesterday = date2.toISOString().slice(0, 10);
-  //   const req = `https://api.covid19api.com/country/${name}?from=${yesterday}T00:00:00Z&to=${today}T00:00:00Z;`;
-  //   const country = await this.dataFetch(req);
-  //   appData.country = {
-  //     ...country,
-  //   };
-  // },
-  async getGlobalFrom(countryName) {
+  async getCountryStats(countryName) {
     const request = `https://api.covid19api.com/country/${countryName}`;
     const country = await this.dataFetch(request);
-    const date = country[0].Date;
-    const requestTwo = `https://api.covid19api.com/world?from=${date}`;
-    const global = await this.dataFetch(requestTwo);
+    appData.countryStats = [...country];
+    const request2 = `https://disease.sh/v3/covid-19/historical/${countryName}?lastdays=366`;
+    const country2 = await this.dataFetch(request2);
+    appData.countryStatsObj = { ...country2 };
+  },
+  async getGlobalStats() {
+    const request =
+      "https://disease.sh/v3/covid-19/historical/all?lastdays=366";
+    const global = await this.dataFetch(request);
     appData.globalStats = {
       ...global,
     };
-    appData.countryStats = [...country];
   },
   getCountryData(CountryCode) {
     const countriesCovidAPI = appData.covidAPI.Countries;

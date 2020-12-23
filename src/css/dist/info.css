@@ -1,0 +1,68 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  color: white;
+}
+
+.info-country {
+  font-size: 2rem;
+}
+
+.info-stats {
+  font-size: 1.4rem;
+}
+
+.toggle-menu {
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.info-day-time {
+  width: auto;
+  height: auto;
+}
+
+.toggle-one,
+.toggle-two {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  min-width: 150px;
+  max-height: 1.4rem;
+  padding: 5px;
+  border: solid 1px white;
+  border-radius: 20px;
+}
+
+.toggle-one {
+  min-width: 190px;
+}
+
+.toggle-two {
+  min-width: 240px;
+}
+
+div[class^=info-arrow] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div[class^=info-arrow]:hover {
+  cursor: pointer;
+}
+
+div[class^=info-arrow]:active {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.hidden {
+  display: none;
+}

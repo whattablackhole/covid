@@ -1,5 +1,4 @@
 import appData from "./app.data.js";
-// import mapBehavior from "./map.behavior.js";
 import info from "./info.js";
 import APIBehavior from "./API.behavior.js";
 import chartConfig from "./chart.config.js";
@@ -7,7 +6,7 @@ import chartConfig from "./chart.config.js";
 const graph = {
   ctx: document.getElementById("myChart"),
   deathsBtn: document.querySelector("#deaths"),
-  recovoredBtn: document.querySelector("#recovored"),
+  recoveredBtn: document.querySelector("#recovered"),
   confirmedBtn: document.querySelector("#confirmed"),
   myChart: null,
   country: null,
@@ -22,42 +21,41 @@ const graph = {
   isListersInited: false,
   currentPopulation: 0,
   divisor: 100000,
+  globalStats: {
+    deaths: undefined,
+    cases: undefined,
+    recovered: undefined,
+  },
   initListeners() {
     if (this.isListersInited === true) {
       return;
     }
     this.isListersInited = true;
     this.deathsBtn.addEventListener("click", this.changeText.bind(this));
-    this.recovoredBtn.addEventListener("click", this.changeText.bind(this));
+    this.recoveredBtn.addEventListener("click", this.changeText.bind(this));
     this.confirmedBtn.addEventListener("click", this.changeText.bind(this));
   },
   changeText(e) {
     if (e.target.id === "deaths") {
       this.deathsBtn.checked = true;
-      this.recovoredBtn.checked = false;
+      this.recoveredBtn.checked = false;
       this.confirmedBtn.checked = false;
-      // if (appData.fullScreenZone === "graph")
-      //   mapBehavior.onButtonClickSimulation("toNew", "graph");
     } else if (e.target.id === "confirmed") {
       this.confirmedBtn.checked = true;
-      this.recovoredBtn.checked = false;
+      this.recoveredBtn.checked = false;
       this.deathsBtn.checked = false;
-      // if (appData.fullScreenZone === "graph")
-      //   mapBehavior.onButtonClickSimulation("to100k", "graph");
     } else {
-      this.recovoredBtn.checked = true;
+      this.recoveredBtn.checked = true;
       this.confirmedBtn.checked = false;
       this.deathsBtn.checked = false;
-      // if (appData.fullScreenZone === "graph")
-      //   mapBehavior.onButtonClickSimulation("to100k", "graph");
     }
-    console.log("hello");
     this.updateInfo();
   },
   createChart() {
     // eslint-disable-next-line
     this.myChart = new Chart(this.ctx, chartConfig);
   },
+
   getCountryDate() {
     this.allDates = [];
     this.allDeaths = [];
@@ -98,6 +96,49 @@ const graph = {
       }
     });
   },
+  toStrictNumber() {
+    this.globalStats.deaths = Object.values(appData.globalStats.deaths);
+    this.globalStats.deaths = this.globalStats.deaths.map((key) =>
+      Math.trunc((key * graph.divisor) / info.currentPopulation)
+    );
+    this.globalStats.cases = Object.values(appData.globalStats.cases);
+    this.globalStats.cases = this.globalStats.cases.map((key) =>
+      Math.trunc((key * graph.divisor) / info.currentPopulation)
+    );
+    this.globalStats.recovered = Object.values(appData.globalStats.recovered);
+    this.globalStats.recovered = this.globalStats.recovered.map((key) =>
+      Math.trunc((key * graph.divisor) / info.currentPopulation)
+    );
+  },
+  toTotalNumber() {
+    this.globalStats.cases = Object.values(appData.globalStats.cases);
+    this.globalStats.deaths = Object.values(appData.globalStats.deaths);
+    this.globalStats.recovered = Object.values(appData.globalStats.recovered);
+  },
+  toStrictTime() {
+    const tempDeaths = Array.from(this.globalStats.deaths);
+    this.globalStats.deaths = this.globalStats.deaths.map((key, index) => {
+      if (index === 0) return key;
+      return key - tempDeaths[index - 1];
+    });
+    const tempCases = Array.from(this.globalStats.cases);
+    this.globalStats.cases = this.globalStats.cases.map((key, index) => {
+      if (index === 0) return key;
+      return key - tempCases[index - 1];
+    });
+    const tempRecovored = Array.from(this.globalStats.recovered);
+    this.globalStats.recovered = this.globalStats.recovered.map(
+      (key, index) => {
+        if (index === 0) return key;
+        return Math.abs(key - tempRecovored[index - 1]);
+      }
+    );
+  },
+  toTotalTime() {
+    this.globalStats.cases = Object.values(appData.globalStats.cases);
+    this.globalStats.deaths = Object.values(appData.globalStats.deaths);
+    this.globalStats.recovered = Object.values(appData.globalStats.recovered);
+  },
   dividePopulation() {
     if (this.isStrictTimeSet && this.isStrictNumberSet) {
       return [
@@ -136,115 +177,173 @@ const graph = {
     info.checkState();
     this.calcPopulation();
     if (appData.CountryCode === "Global") {
-      document.querySelector(".graph-wrapper").classList.add("hide");
+      await APIBehavior.getGlobalStats();
       chartConfig.data.datasets[0].label = "Global";
       chartConfig.type = "bar";
       this.createChart();
-      if (info.isTotalTimeSet && info.isTotalNumberSet) {
-        this.myChart.data.labels = [
-          "Total Deaths",
-          "Total Recovered",
-          "Total Confirms",
-        ];
-        this.myChart.data.datasets[0].data = [
-          appData.covidAPI.Global.TotalDeaths,
-          appData.covidAPI.Global.TotalRecovered,
-          appData.covidAPI.Global.TotalConfirmed,
-        ];
-        this.myChart.update();
+      if (info.isTotalTimeSet) {
+        this.toTotalTime();
       }
-      if (info.isStrictTimeSet && info.isTotalNumberSet) {
-        this.myChart.data.labels = [
-          "New Deaths",
-          "New Recovered",
-          "New Confirms",
-        ];
-        this.myChart.data.datasets[0].data = [
-          appData.covidAPI.Global.NewDeaths,
-          appData.covidAPI.Global.NewRecovered,
-          appData.covidAPI.Global.NewConfirmed,
-        ];
-        this.myChart.update();
+      if (info.isTotalNumberSet) {
+        this.toTotalNumber();
       }
-      if (info.isTotalTimeSet && info.isStrictNumberSet) {
-        this.myChart.data.labels = [
-          "Total Death/100T",
-          "Total Recovered/100T",
-          "Total Confirmed/100T",
-        ];
-        this.myChart.data.datasets[0].data = this.dividePopulation();
-        this.myChart.update();
+      if (info.isStrictNumberSet) {
+        this.toStrictNumber();
       }
-      if (info.isStrictTimeSet && info.isStrictNumberSet) {
-        this.myChart.data.labels = [
-          "New Death/100T",
-          "New Recovered/100T",
-          "New Confirmed/100T",
-        ];
+      if (info.isStrictTimeSet) {
+        this.toStrictTime();
+      }
 
-        this.myChart.data.datasets[0].data = [
-          Math.trunc(
-            (appData.covidAPI.Global.NewDeaths * this.divisor) /
-              info.currentPopulation
-          ),
-          Math.trunc(
-            (appData.covidAPI.Global.NewRecovered * this.divisor) /
-              info.currentPopulation
-          ),
-          Math.trunc(
-            (appData.covidAPI.Global.NewConfirmed * this.divisor) /
-              info.currentPopulation
-          ),
-        ];
-        this.myChart.update();
+      if (this.deathsBtn.checked === true) {
+        this.myChart.data.labels = Object.keys(appData.globalStats.deaths);
+        this.myChart.data.datasets[0].data = this.globalStats.deaths;
+      }
+      if (this.confirmedBtn.checked === true) {
+        this.myChart.data.labels = Object.keys(appData.globalStats.cases);
+        this.myChart.data.datasets[0].data = this.globalStats.cases;
+      }
+      if (this.recoveredBtn.checked === true) {
+        this.myChart.data.labels = Object.keys(appData.globalStats.recovered);
+        this.myChart.data.datasets[0].data = this.globalStats.recovered;
       }
     } else {
-      document.querySelector(".graph-wrapper").classList.remove("hide");
       chartConfig.data.datasets[0].label = `${this.country.Country}`;
       chartConfig.type = "line";
       this.myChart.destroy();
       this.createChart();
-      await APIBehavior.getGlobalFrom(this.country.Country);
-      console.log(appData.countryStats);
+      await APIBehavior.getCountryStats(this.country.Country);
       this.getCountryDate();
       if (info.isStrictTimeSet) {
         if (this.myChart !== null) {
           this.myChart.destroy();
         }
-        chartConfig.type = "bar";
         this.createChart();
         if (info.isTotalNumberSet) {
-          this.myChart.data.labels = [
-            "New Deaths",
-            "New Recovered",
-            "New Confirmed",
-          ];
-          this.myChart.data.datasets[0].data = [
-            info.country.NewDeaths,
-            info.country.NewRecovered,
-            info.country.NewConfirmed,
-          ];
-          this.myChart.update();
+          if (this.deathsBtn.checked === true) {
+            const compareArr = Object.values(
+              appData.countryStatsObj.timeline.deaths
+            );
+            let tempDeaths = Object.values(
+              appData.countryStatsObj.timeline.deaths
+            );
+            tempDeaths = tempDeaths.map((key, index) => {
+              if (index === 0) return key;
+              return key - compareArr[index - 1];
+            });
+            this.myChart.data.labels = Object.keys(
+              appData.countryStatsObj.timeline.deaths
+            );
+            this.myChart.data.datasets[0].data = tempDeaths;
+          }
+
+          if (this.confirmedBtn.checked === true) {
+            const compareArr = Object.values(
+              appData.countryStatsObj.timeline.cases
+            );
+            let tempCases = Object.values(
+              appData.countryStatsObj.timeline.cases
+            );
+            tempCases = tempCases.map((key, index) => {
+              if (index === 0) return key;
+              return key - compareArr[index - 1];
+            });
+            this.myChart.data.labels = Object.keys(
+              appData.countryStatsObj.timeline.cases
+            );
+            this.myChart.data.datasets[0].data = tempCases;
+          }
+          if (this.recoveredBtn.checked === true) {
+            const compareArr = Object.values(
+              appData.countryStatsObj.timeline.recovered
+            );
+            let tempRecovered = Object.values(
+              appData.countryStatsObj.timeline.recovered
+            );
+            tempRecovered = tempRecovered.map((key, index) => {
+              if (index === 0) return key;
+              return key - compareArr[index - 1];
+            });
+            this.myChart.data.labels = Object.keys(
+              appData.countryStatsObj.timeline.recovered
+            );
+            this.myChart.data.datasets[0].data = tempRecovered;
+          }
         } else {
-          this.myChart.data.labels = [
-            "New Deaths/100T",
-            "New Recovered/100T",
-            "New Confirmed/100T",
-          ];
-          this.myChart.data.datasets[0].data = [
-            Math.trunc(
-              (info.country.NewDeaths * this.divisor) / info.currentPopulation
-            ),
-            Math.trunc(
-              (info.country.NewRecovered * this.divisor) /
-                info.currentPopulation
-            ),
-            Math.trunc(
-              (info.country.NewConfirmed * this.divisor) /
-                info.currentPopulation
-            ),
-          ];
-          this.myChart.update();
+          if (this.recoveredBtn.checked === true) {
+            let compareArr = Object.values(
+              appData.countryStatsObj.timeline.recovered
+            );
+            compareArr = compareArr.map((key) =>
+              Math.trunc((key * this.divisor) / this.currentPopulation)
+            );
+            let tempRecovered = Object.values(
+              appData.countryStatsObj.timeline.recovered
+            );
+            tempRecovered = tempRecovered.map((key, index) => {
+              if (index === 0)
+                return Math.trunc(
+                  (key * this.divisor) / this.currentPopulation
+                );
+              return (
+                Math.trunc((key * this.divisor) / this.currentPopulation) -
+                compareArr[index - 1]
+              );
+            });
+            this.myChart.data.labels = Object.keys(
+              appData.countryStatsObj.timeline.recovered
+            );
+            this.myChart.data.datasets[0].data = tempRecovered;
+          }
+          if (this.deathsBtn.checked === true) {
+            let compareArr = Object.values(
+              appData.countryStatsObj.timeline.deaths
+            );
+            compareArr = compareArr.map((key) =>
+              Math.trunc((key * this.divisor) / this.currentPopulation)
+            );
+            let tempDeaths = Object.values(
+              appData.countryStatsObj.timeline.deaths
+            );
+            tempDeaths = tempDeaths.map((key, index) => {
+              if (index === 0)
+                return Math.trunc(
+                  (key * this.divisor) / this.currentPopulation
+                );
+              return (
+                Math.trunc((key * this.divisor) / this.currentPopulation) -
+                compareArr[index - 1]
+              );
+            });
+            this.myChart.data.labels = Object.keys(
+              appData.countryStatsObj.timeline.deaths
+            );
+            this.myChart.data.datasets[0].data = tempDeaths;
+          }
+          if (this.confirmedBtn.checked === true) {
+            let compareArr = Object.values(
+              appData.countryStatsObj.timeline.cases
+            );
+            compareArr = compareArr.map((key) =>
+              Math.trunc((key * this.divisor) / this.currentPopulation)
+            );
+            let tempCases = Object.values(
+              appData.countryStatsObj.timeline.cases
+            );
+            tempCases = tempCases.map((key, index) => {
+              if (index === 0)
+                return Math.trunc(
+                  (key * this.divisor) / this.currentPopulation
+                );
+              return (
+                Math.trunc((key * this.divisor) / this.currentPopulation) -
+                compareArr[index - 1]
+              );
+            });
+            this.myChart.data.labels = Object.keys(
+              appData.countryStatsObj.timeline.cases
+            );
+            this.myChart.data.datasets[0].data = tempCases;
+          }
         }
       } else {
         if (this.deathsBtn.checked === true) {
@@ -255,15 +354,13 @@ const graph = {
           this.myChart.data.labels = this.allDates;
           this.myChart.data.datasets[0].data = [...this.allConfirms];
         }
-        if (this.recovoredBtn.checked === true) {
-          console.log("a");
-          console.log(this.allRecovered);
+        if (this.recoveredBtn.checked === true) {
           this.myChart.data.labels = this.allDates;
           this.myChart.data.datasets[0].data = [...this.allRecovered];
         }
-        this.myChart.update();
       }
     }
+    this.myChart.update();
   },
   calcPopulation() {
     if (appData.CountryCode === "Global") {

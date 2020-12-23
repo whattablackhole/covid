@@ -8,38 +8,40 @@ const chartConfig = {
       "2020-01-22",
       "2020-01-22",
       "2020-01-22",
-    ], // days
+    ],
     datasets: [
       {
         label: "Global",
-        data: [400, 700, 800, 900, 1200, 1500], // ceases
-        backgroundColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
+        data: [400, 700, 800, 900, 1200, 1500],
+        backgroundColor: "rgba(255,0,0,0.6)",
+        borderWidth: 0.5,
       },
     ],
   },
   options: {
     responsive: true,
     maintainAspectRatio: false,
+    legend: {
+      labels: {
+        fontColor: "blue",
+        fontSize: 18,
+      },
+    },
     scales: {
       yAxes: [
         {
           ticks: {
+            fontColor: "yellow",
+            beginAtZero: true,
+          },
+        },
+      ],
+      xAxes: [
+        {
+          ticks: {
+            fontColor: "white",
+            fontSize: 14,
+            stepSize: 1,
             beginAtZero: true,
           },
         },
