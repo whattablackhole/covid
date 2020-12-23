@@ -1,0 +1,129 @@
+.icon-marker {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 3.6em;
+  height: 3.6em;
+  font-size: 0.7em;
+  font-weight: bold;
+  background-color: #da0c27;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.9);
+}
+.icon-marker:hover .icon-marker-tooltip {
+  display: block;
+}
+
+.icon-marker-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  width: 16em;
+  font-size: 1.4em;
+  padding: 1em;
+  background-color: #09607a;
+  border-radius: 0.4em;
+  margin-bottom: 1em;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.9);
+}
+.icon-marker-tooltip:before {
+  display: block;
+  position: absolute;
+  bottom: -0.6em;
+  left: 50%;
+  content: "";
+  width: 1.4em;
+  height: 1.4em;
+  background-color: #09607a;
+  transform: rotate(45deg);
+  margin-left: -0.7em;
+}
+.icon-marker-tooltip h2 {
+  font-size: 1.5em;
+  line-height: 1.2;
+  margin-bottom: 0.1em;
+  margin-top: 0;
+}
+.icon-marker-tooltip h3 {
+  font-size: 1.2em;
+  margin: 0.1em 0;
+  font-weight: normal;
+  color: #13bde7;
+}
+.icon-marker-tooltip ul,
+.icon-marker-tooltip p {
+  font-weight: normal;
+}
+.icon-marker-tooltip ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.6em 0 0;
+}
+
+.leaflet-bottom.leaflet-right {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr auto;
+  grid-template-areas:
+    "legend"
+    "buttons";
+  backdrop-filter: blur(20px);
+  right: 10px;
+  bottom: 10px;
+}
+
+.map__legend {
+  grid-area: legend;
+  padding-right: 18px;
+  display: grid;
+  grid-template-columns: 30px auto;
+  justify-content: flex-end;
+  color: white;
+}
+.map__legend i {
+  width: 18px;
+  height: 18px;
+  opacity: 0.7;
+}
+
+.leaflet-bottom {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 3px;
+}
+.leaflet-control-attribution {
+  display: none;
+}
+.leaflet-bottom,
+.leaflet-right,
+.leaflet-control {
+  margin-bottom: 0 !important;
+  margin-right: 0 !important;
+}
+.map__switch-toNew,
+.map__switch-to100k,
+.map__switch-sortBy {
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 0 10px 0 10px;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+}
+.map__switch-to100k {
+  min-width: 190px;
+}
+.map__switch-toNew {
+  min-width: 150px;
+}
+.map__switch-sortBy {
+  min-width: 100px;
+}
+.map__switches {
+  grid-area: buttons;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
